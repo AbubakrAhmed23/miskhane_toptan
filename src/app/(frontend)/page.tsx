@@ -3,10 +3,11 @@ import Link from 'next/link'
 import { CategoryCard } from '@/components/CategoryCard'
 import { MediaImage } from '@/components/MediaImage'
 import { ProductCard } from '@/components/ProductCard'
+import { ProductMarquee } from '@/components/ProductMarquee'
 import { WhatsAppButton } from '@/components/WhatsAppButton'
 import { ArrowIcon, CheckIcon } from '@/components/icons'
 import { firstProductImage } from '@/lib/media'
-import { getCategories, getFeaturedProducts, getSettings } from '@/lib/queries'
+import { getCategories, getFeaturedProducts, getProducts, getSettings } from '@/lib/queries'
 
 const TRUST = [
   { title: 'Geniş Ürün Yelpazesi', text: 'Şişe, kapak, valf, esans ve difüzörde yüzlerce seçenek.' },
@@ -16,11 +17,13 @@ const TRUST = [
 ]
 
 export default async function HomePage() {
-  const [settings, categories, featured] = await Promise.all([
+  const [settings, categories, featured, catalog] = await Promise.all([
     getSettings(),
     getCategories(),
     getFeaturedProducts(8),
+    getProducts({ limit: 20 }),
   ])
+  const marqueeProducts = catalog.docs
 
   const heroImage =
     settings?.heroImage || (featured.length > 0 ? firstProductImage(featured[0]) : null)
@@ -71,6 +74,29 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Kayan ürün şeridi */}
+      {marqueeProducts.length > 0 && (
+        <section className="border-t border-line bg-cream py-10">
+          <div className="mx-auto mb-6 flex w-full max-w-6xl items-end justify-between gap-4 px-5 sm:px-8">
+            <div>
+              <h2 className="font-serif text-2xl font-semibold text-ink sm:text-3xl">
+                Ürünlerimizden
+              </h2>
+              <p className="mt-1 text-sm text-muted">
+                Bir ürüne tıklayın, ait olduğu kategoriyi keşfedin.
+              </p>
+            </div>
+            <Link
+              href="/urunler"
+              className="hidden items-center gap-1 text-sm font-medium text-gold hover:underline sm:inline-flex"
+            >
+              Tüm Ürünler <ArrowIcon className="h-4 w-4" />
+            </Link>
+          </div>
+          <ProductMarquee products={marqueeProducts} />
+        </section>
+      )}
 
       {/* Trust band */}
       <section className="border-y border-line bg-paper">
