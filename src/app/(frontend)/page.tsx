@@ -4,6 +4,7 @@ import { CategoryCard } from '@/components/CategoryCard'
 import { MediaImage } from '@/components/MediaImage'
 import { ProductCard } from '@/components/ProductCard'
 import { ProductMarquee } from '@/components/ProductMarquee'
+import { Reveal } from '@/components/Reveal'
 import { WhatsAppButton } from '@/components/WhatsAppButton'
 import { ArrowIcon, CheckIcon } from '@/components/icons'
 import { firstProductImage } from '@/lib/media'
@@ -33,7 +34,7 @@ export default async function HomePage() {
       {/* Hero */}
       <section className="relative overflow-hidden bg-cream">
         <div className="mx-auto grid w-full max-w-6xl items-center gap-10 px-5 py-16 sm:px-8 md:grid-cols-2 md:py-24">
-          <div>
+          <div className="animate-fade-up">
             <span className="inline-flex items-center gap-2 rounded-full border border-line bg-paper px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-gold">
               Toptan Parfüm Ambalajı
             </span>
@@ -59,7 +60,7 @@ export default async function HomePage() {
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative animate-fade-up [animation-delay:150ms]">
             <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl border border-line bg-white shadow-soft">
               <MediaImage
                 media={heroImage}
@@ -79,14 +80,14 @@ export default async function HomePage() {
       {marqueeProducts.length > 0 && (
         <section className="border-t border-line bg-cream py-10">
           <div className="mx-auto mb-6 flex w-full max-w-6xl items-end justify-between gap-4 px-5 sm:px-8">
-            <div>
+            <Reveal>
               <h2 className="font-serif text-2xl font-semibold text-ink sm:text-3xl">
                 Ürünlerimizden
               </h2>
               <p className="mt-1 text-sm text-muted">
                 Bir ürüne tıklayın, ait olduğu kategoriyi keşfedin.
               </p>
-            </div>
+            </Reveal>
             <Link
               href="/urunler"
               className="hidden items-center gap-1 text-sm font-medium text-gold hover:underline sm:inline-flex"
@@ -101,8 +102,8 @@ export default async function HomePage() {
       {/* Trust band */}
       <section className="border-y border-line bg-paper">
         <div className="mx-auto grid w-full max-w-6xl gap-6 px-5 py-10 sm:px-8 sm:grid-cols-2 lg:grid-cols-4">
-          {TRUST.map((item) => (
-            <div key={item.title} className="flex gap-3">
+          {TRUST.map((item, i) => (
+            <Reveal key={item.title} delay={i * 80} className="flex gap-3">
               <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold">
                 <CheckIcon className="h-5 w-5" />
               </span>
@@ -110,7 +111,7 @@ export default async function HomePage() {
                 <h3 className="font-serif text-lg font-semibold text-ink">{item.title}</h3>
                 <p className="mt-0.5 text-sm text-muted">{item.text}</p>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -118,7 +119,7 @@ export default async function HomePage() {
       {/* Categories */}
       {categories.length > 0 && (
         <section className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8">
-          <div className="flex items-end justify-between gap-4">
+          <Reveal className="flex items-end justify-between gap-4">
             <div>
               <h2 className="font-serif text-3xl font-semibold text-ink sm:text-4xl">Kategoriler</h2>
               <p className="mt-2 text-muted">İhtiyacınıza uygun ürün grubunu seçin.</p>
@@ -129,10 +130,12 @@ export default async function HomePage() {
             >
               Tümünü Gör <ArrowIcon className="h-4 w-4" />
             </Link>
-          </div>
+          </Reveal>
           <div className="mt-8 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
-            {categories.map((category) => (
-              <CategoryCard key={category.id} category={category} />
+            {categories.map((category, i) => (
+              <Reveal key={category.id} delay={i * 70}>
+                <CategoryCard category={category} />
+              </Reveal>
             ))}
           </div>
         </section>
@@ -142,7 +145,7 @@ export default async function HomePage() {
       {featured.length > 0 && (
         <section className="bg-sand/50">
           <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8">
-            <div className="flex items-end justify-between gap-4">
+            <Reveal className="flex items-end justify-between gap-4">
               <h2 className="font-serif text-3xl font-semibold text-ink sm:text-4xl">
                 Öne Çıkan Ürünler
               </h2>
@@ -152,10 +155,12 @@ export default async function HomePage() {
               >
                 Tüm Ürünler <ArrowIcon className="h-4 w-4" />
               </Link>
-            </div>
+            </Reveal>
             <div className="mt-8 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
-              {featured.map((product) => (
-                <ProductCard key={product.id} product={product} />
+              {featured.map((product, i) => (
+                <Reveal key={product.id} delay={(i % 4) * 70}>
+                  <ProductCard product={product} />
+                </Reveal>
               ))}
             </div>
           </div>
@@ -164,7 +169,7 @@ export default async function HomePage() {
 
       {/* CTA band */}
       <section className="bg-espresso">
-        <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-6 px-5 py-16 text-center sm:px-8">
+        <Reveal className="mx-auto flex w-full max-w-6xl flex-col items-center gap-6 px-5 py-16 text-center sm:px-8">
           <h2 className="max-w-2xl font-serif text-3xl font-semibold text-cream sm:text-4xl">
             Aradığınız ürünü bulamadınız mı?
           </h2>
@@ -176,7 +181,7 @@ export default async function HomePage() {
             number={settings?.whatsappNumber}
             message={settings?.whatsappDefaultMessage}
           />
-        </div>
+        </Reveal>
       </section>
     </>
   )
