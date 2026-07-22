@@ -1,13 +1,12 @@
 import Link from 'next/link'
 
 import { CategoryCard } from '@/components/CategoryCard'
-import { MediaImage } from '@/components/MediaImage'
 import { ProductCard } from '@/components/ProductCard'
 import { ProductMarquee } from '@/components/ProductMarquee'
+import { ProductSlider } from '@/components/ProductSlider'
 import { Reveal } from '@/components/Reveal'
 import { WhatsAppButton } from '@/components/WhatsAppButton'
 import { ArrowIcon, CheckIcon } from '@/components/icons'
-import { firstProductImage } from '@/lib/media'
 import { getCategories, getFeaturedProducts, getProducts, getSettings } from '@/lib/queries'
 
 const TRUST = [
@@ -25,9 +24,7 @@ export default async function HomePage() {
     getProducts({ limit: 20 }),
   ])
   const marqueeProducts = catalog.docs
-
-  const heroImage =
-    settings?.heroImage || (featured.length > 0 ? firstProductImage(featured[0]) : null)
+  const sliderProducts = featured.length > 0 ? featured : marqueeProducts
 
   return (
     <>
@@ -61,17 +58,8 @@ export default async function HomePage() {
           </div>
 
           <div className="relative animate-fade-up [animation-delay:150ms]">
-            <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl border border-line bg-white shadow-soft">
-              <MediaImage
-                media={heroImage}
-                size="large"
-                alt={settings?.heroTitle || 'Miskhane toptan parfüm ambalajı'}
-                className="object-contain p-8"
-                sizes="(max-width: 768px) 90vw, 420px"
-                priority
-              />
-            </div>
-            <div className="pointer-events-none absolute -right-6 -top-6 -z-0 hidden h-40 w-40 rounded-full bg-gold-soft/25 blur-2xl md:block" />
+            <ProductSlider products={sliderProducts} interval={3000} />
+            <div className="pointer-events-none absolute -right-6 -top-6 -z-10 hidden h-40 w-40 rounded-full bg-gold-soft/25 blur-2xl md:block" />
           </div>
         </div>
       </section>
