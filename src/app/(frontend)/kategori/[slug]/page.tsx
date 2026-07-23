@@ -40,19 +40,19 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   return (
     <div className="mx-auto w-full max-w-6xl px-5 py-12 sm:px-8">
       <nav className="mb-6 flex items-center gap-2 text-sm text-muted">
-        <Link href="/" className="hover:text-gold">
+        <Link href="/" className="hover:text-gold-soft">
           Ana Sayfa
         </Link>
-        <span>/</span>
-        <Link href="/urunler" className="hover:text-gold">
+        <span className="text-line">/</span>
+        <Link href="/urunler" className="hover:text-gold-soft">
           Ürünler
         </Link>
-        <span>/</span>
-        <span className="text-ink">{category.name}</span>
+        <span className="text-line">/</span>
+        <span className="text-cream">{category.name}</span>
       </nav>
 
       <header className="mb-8">
-        <h1 className="font-serif text-3xl font-semibold text-ink sm:text-4xl">{category.name}</h1>
+        <h1 className="font-serif text-3xl font-semibold text-cream sm:text-4xl">{category.name}</h1>
         {category.description && (
           <p className="mt-2 max-w-2xl text-muted">{category.description}</p>
         )}
@@ -66,7 +66,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
           ))}
         </div>
       ) : (
-        <div className="flex flex-col items-center gap-5 rounded-2xl border border-line bg-paper py-16 text-center">
+        <div className="flex flex-col items-center gap-5 rounded-2xl border border-line bg-panel py-16 text-center">
           <p className="max-w-md text-muted">
             Bu kategoride henüz ürün eklenmemiş. WhatsApp üzerinden bize ulaşabilirsiniz.
           </p>
@@ -80,7 +80,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
       <div className="mt-10">
         <Link
           href="/urunler"
-          className="inline-flex items-center gap-1 text-sm font-medium text-gold hover:underline"
+          className="inline-flex items-center gap-1 text-sm font-medium text-gold-soft hover:gap-2"
         >
           <ArrowIcon className="h-4 w-4 rotate-180" />
           Tüm ürünlere dön

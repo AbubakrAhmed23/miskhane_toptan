@@ -35,12 +35,17 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s — ${title}`,
     },
     description,
+    icons: {
+      icon: [{ url: '/brand/favicon.png', type: 'image/png' }],
+      apple: '/brand/favicon.png',
+    },
     openGraph: {
       type: 'website',
       locale: 'tr_TR',
       siteName: title,
       title: `${title} — Toptan Parfüm Ambalajı`,
       description,
+      images: ['/brand/logo-mark.png'],
     },
     robots: { index: true, follow: true },
   }

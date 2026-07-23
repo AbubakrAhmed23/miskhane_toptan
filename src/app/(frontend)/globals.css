@@ -1,27 +1,33 @@
 @import 'tailwindcss';
 
 @theme {
-  /* Marka paleti — sıcak fildişi, antik altın, koyu mürekkep */
-  --color-cream: #f7f3ec;
-  --color-paper: #ffffff;
-  --color-sand: #efe8dc;
-  --color-ink: #1c1917;
-  --color-muted: #6b6157;
-  --color-gold: #b08d46;
-  --color-gold-soft: #c9a96a;
-  --color-line: #e7dfd3;
-  --color-espresso: #241c14;
+  /* Siyah + Gold marka paleti */
+  --color-night: #0a0a0b; /* sayfa zemini */
+  --color-night-2: #0e0e10; /* alternatif koyu bölüm */
+  --color-panel: #151318; /* kartlar */
+  --color-panel-2: #1c1922; /* daha açık panel */
+  --color-cream: #f5efe2; /* birincil açık metin */
+  --color-muted: #9a9284; /* ikincil metin (koyu üzerinde) */
+  --color-gold: #c9a24b; /* ana altın */
+  --color-gold-soft: #ecd08a; /* açık altın (vurgu) */
+  --color-gold-deep: #9c7c2f; /* koyu altın */
+  --color-line: #2a2630; /* koyu üzerinde ince çizgi */
+  --color-ink: #14110b; /* koyu metin (altın/beyaz üzerinde) */
+  --color-paper: #f4f0e8; /* ürün görseli açık zemini */
   --color-whatsapp: #25d366;
   --color-whatsapp-dark: #1da851;
 
   --font-serif: var(--font-cormorant), Georgia, 'Times New Roman', serif;
   --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
 
-  --shadow-soft: 0 1px 2px rgba(28, 25, 23, 0.04), 0 8px 24px rgba(28, 25, 23, 0.06);
+  --shadow-gold: 0 10px 40px -12px rgba(201, 162, 75, 0.35);
+  --shadow-panel: 0 1px 2px rgba(0, 0, 0, 0.4), 0 18px 40px -20px rgba(0, 0, 0, 0.7);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 * {
@@ -36,8 +42,8 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--color-cream);
-  color: var(--color-ink);
+  background: var(--color-night);
+  color: var(--color-cream);
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.6;
@@ -50,7 +56,45 @@ img {
   height: auto;
 }
 
-/* Sağdan sola sürekli kayan ürün şeridi (marquee) */
+::selection {
+  background: var(--color-gold);
+  color: var(--color-ink);
+}
+
+/* Altın gradyan metin (başlık vurguları + wordmark) */
+.gold-text {
+  background: linear-gradient(180deg, #f6e2a6 0%, #d9b45e 45%, #a07f2e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* İnce altın çizgi */
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+/* Altın parıltılı birincil buton */
+.btn-gold {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #e6c477, #c9a24b 55%, #a97f2b);
+  color: var(--color-ink);
+}
+.btn-gold::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.55) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.8s var(--ease-out);
+}
+.btn-gold:hover::after {
+  transform: translateX(120%);
+}
+
+/* Kayan ürün şeridi (marquee) */
 @keyframes marquee {
   from {
     transform: translateX(0);
@@ -59,19 +103,28 @@ img {
     transform: translateX(-50%);
   }
 }
-
 .animate-marquee {
   animation: marquee var(--marquee-duration, 45s) linear infinite;
   will-change: transform;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .animate-marquee {
-    animation: none;
+/* Yavaş altın parıltı (hero halesi) */
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.08);
   }
 }
+.animate-glow {
+  animation: glow-pulse 6s ease-in-out infinite;
+}
 
-/* Bölüm giriş animasyonu (hafif yukarı kayarak belirme) */
+/* Açılış: yukarı kayarak belirme */
 @keyframes fade-up {
   from {
     opacity: 0;
@@ -82,40 +135,40 @@ img {
     transform: translateY(0);
   }
 }
-
 .animate-fade-up {
-  animation: fade-up 0.7s ease both;
+  animation: fade-up 0.7s var(--ease-out) both;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .animate-fade-up {
-    animation: none;
-  }
-}
-
-/* Kaydırdıkça belirme (scroll reveal) — görünür olunca yumuşakça belirir */
+/* Kaydırdıkça belirme (scroll reveal) */
 .reveal {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(22px);
   transition:
-    opacity 0.7s ease,
-    transform 0.7s ease;
+    opacity 0.7s var(--ease-out),
+    transform 0.7s var(--ease-out);
 }
-
 .reveal.is-visible {
   opacity: 1;
   transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-glow,
+  .animate-fade-up {
+    animation: none;
+  }
   .reveal {
     opacity: 1;
     transform: none;
     transition: none;
   }
+  .btn-gold::after {
+    display: none;
+  }
 }
 
-/* Zengin metin (Payload richText) çıktısı için temel tipografi */
+/* Zengin metin (Payload richText) çıktısı */
 .richtext > * {
   margin: 0 0 1rem;
 }
@@ -124,12 +177,14 @@ img {
   font-size: 1.6rem;
   font-weight: 600;
   margin-top: 1.5rem;
+  color: var(--color-cream);
 }
 .richtext h3 {
   font-family: var(--font-serif);
   font-size: 1.3rem;
   font-weight: 600;
   margin-top: 1.25rem;
+  color: var(--color-cream);
 }
 .richtext ul {
   list-style: disc;
@@ -140,6 +195,6 @@ img {
   padding-left: 1.25rem;
 }
 .richtext a {
-  color: var(--color-gold);
+  color: var(--color-gold-soft);
   text-decoration: underline;
 }

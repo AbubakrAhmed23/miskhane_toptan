@@ -21,22 +21,21 @@ export default async function AboutPage() {
   const settings = await getSettings()
 
   return (
-    <div className="mx-auto w-full max-w-4xl px-5 py-14 sm:px-8">
+    <div className="mx-auto w-full max-w-4xl px-5 py-16 sm:px-8">
       <header className="text-center">
-        <span className="text-xs font-semibold uppercase tracking-widest text-gold">
-          Hakkımızda
-        </span>
-        <h1 className="mt-3 font-serif text-4xl font-semibold text-ink sm:text-5xl">
+        <p className="text-xs font-semibold uppercase tracking-[0.35em] text-gold">Hakkımızda</p>
+        <h1 className="mt-4 font-serif text-4xl font-semibold text-cream sm:text-5xl">
           {settings?.siteTitle || 'Miskhane Toptan'}
         </h1>
-        <p className="mt-4 text-lg text-muted">
+        <div className="gold-rule mx-auto mt-5 h-px w-24" />
+        <p className="mt-5 text-lg text-muted">
           {settings?.tagline || 'Parfüm ambalajında zarafet.'}
         </p>
       </header>
 
-      <div className="mt-10 text-ink">
+      <div className="mt-12">
         {settings?.aboutText ? (
-          <div className="richtext text-lg leading-relaxed">
+          <div className="richtext text-lg leading-relaxed text-cream/85">
             <RichText data={settings.aboutText} />
           </div>
         ) : (
@@ -55,23 +54,23 @@ export default async function AboutPage() {
         )}
       </div>
 
-      <div className="mt-12 grid gap-6 sm:grid-cols-3">
+      <div className="mt-14 grid gap-6 sm:grid-cols-3">
         {VALUES.map((v) => (
-          <div key={v.title} className="rounded-xl border border-line bg-paper p-6">
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gold/10 text-gold">
+          <div key={v.title} className="rounded-xl border border-line bg-panel p-6">
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gold/15 text-gold-soft">
               <CheckIcon className="h-5 w-5" />
             </span>
-            <h3 className="mt-4 font-serif text-xl font-semibold text-ink">{v.title}</h3>
+            <h3 className="mt-4 font-serif text-xl font-semibold text-cream">{v.title}</h3>
             <p className="mt-1 text-sm text-muted">{v.text}</p>
           </div>
         ))}
       </div>
 
-      <div className="mt-12 flex flex-col items-center gap-4 rounded-2xl bg-espresso px-6 py-12 text-center">
+      <div className="mt-14 flex flex-col items-center gap-4 rounded-2xl border border-line bg-night-2 px-6 py-14 text-center">
         <h2 className="font-serif text-2xl font-semibold text-cream sm:text-3xl">
           Bizimle çalışmak ister misiniz?
         </h2>
-        <p className="max-w-md text-cream/70">
+        <p className="max-w-md text-muted">
           Ürünlerimiz ve toptan şartları hakkında bilgi almak için WhatsApp üzerinden ulaşın.
         </p>
         <WhatsAppButton

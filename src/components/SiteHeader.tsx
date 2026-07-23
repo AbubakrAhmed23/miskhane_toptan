@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import type { Setting } from '@/payload-types'
 import { waLink } from '@/lib/whatsapp'
@@ -19,27 +19,46 @@ const NAV = [
 export function SiteHeader({ settings }: { settings: Setting | null }) {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname.startsWith(href)
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-cream/90 backdrop-blur">
-      <div className="mx-auto flex h-[72px] w-full max-w-6xl items-center justify-between px-5 sm:px-8">
+    <header
+      className={`sticky top-0 z-40 border-b transition-colors duration-300 ${
+        scrolled
+          ? 'border-line bg-night/90 backdrop-blur'
+          : 'border-transparent bg-night/70 backdrop-blur-sm'
+      }`}
+    >
+      <div className="mx-auto flex h-[76px] w-full max-w-6xl items-center justify-between px-5 sm:px-8">
         <Link href="/" aria-label="Ana sayfa">
-          <Logo settings={settings} />
+          <Logo />
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-9 md:flex">
           {NAV.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={`text-sm font-medium transition hover:text-gold ${
-                isActive(item.href) ? 'text-gold' : 'text-ink'
+              className={`group relative text-sm font-medium tracking-wide transition-colors ${
+                isActive(item.href) ? 'text-gold-soft' : 'text-cream/85 hover:text-gold-soft'
               }`}
             >
               {item.label}
+              <span
+                className={`absolute -bottom-1.5 left-0 h-px bg-gold transition-all duration-300 ${
+                  isActive(item.href) ? 'w-full' : 'w-0 group-hover:w-full'
+                }`}
+              />
             </Link>
           ))}
         </nav>
@@ -48,7 +67,7 @@ export function SiteHeader({ settings }: { settings: Setting | null }) {
           href={waLink(settings?.whatsappNumber, settings?.whatsappDefaultMessage)}
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden items-center gap-2 rounded-full bg-whatsapp px-5 py-2.5 text-sm font-medium text-white transition hover:bg-whatsapp-dark md:inline-flex"
+          className="btn-gold hidden items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold shadow-gold md:inline-flex"
         >
           <WhatsAppIcon className="h-4 w-4" />
           WhatsApp
@@ -56,36 +75,38 @@ export function SiteHeader({ settings }: { settings: Setting | null }) {
 
         <button
           type="button"
-          className="md:hidden"
+          className="text-cream md:hidden"
           onClick={() => setOpen(true)}
           aria-label="Menüyü aç"
         >
-          <MenuIcon className="h-7 w-7 text-ink" />
+          <MenuIcon className="h-7 w-7" />
         </button>
       </div>
 
       {open && (
         <div className="fixed inset-0 z-50 md:hidden">
           <div
-            className="absolute inset-0 bg-ink/40"
+            className="absolute inset-0 bg-black/60"
             onClick={() => setOpen(false)}
             aria-hidden="true"
           />
-          <div className="absolute right-0 top-0 flex h-full w-72 max-w-[80%] flex-col bg-cream p-6 shadow-xl">
+          <div className="absolute right-0 top-0 flex h-full w-72 max-w-[82%] flex-col border-l border-line bg-night p-6 shadow-panel">
             <div className="flex items-center justify-between">
-              <Logo settings={settings} />
+              <Logo />
               <button type="button" onClick={() => setOpen(false)} aria-label="Menüyü kapat">
-                <CloseIcon className="h-6 w-6 text-ink" />
+                <CloseIcon className="h-6 w-6 text-cream" />
               </button>
             </div>
-            <nav className="mt-8 flex flex-col gap-1">
+            <nav className="mt-10 flex flex-col gap-1">
               {NAV.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   onClick={() => setOpen(false)}
                   className={`rounded-lg px-3 py-3 text-base font-medium transition ${
-                    isActive(item.href) ? 'bg-sand text-gold' : 'text-ink hover:bg-sand'
+                    isActive(item.href)
+                      ? 'bg-panel text-gold-soft'
+                      : 'text-cream/85 hover:bg-panel'
                   }`}
                 >
                   {item.label}
@@ -97,7 +118,7 @@ export function SiteHeader({ settings }: { settings: Setting | null }) {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className="mt-6 flex items-center justify-center gap-2 rounded-full bg-whatsapp px-5 py-3 font-medium text-white transition hover:bg-whatsapp-dark"
+              className="btn-gold mt-8 flex items-center justify-center gap-2 rounded-full px-5 py-3 font-semibold"
             >
               <WhatsAppIcon className="h-5 w-5" />
               WhatsApp ile İletişim

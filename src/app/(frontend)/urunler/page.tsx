@@ -32,7 +32,7 @@ export default async function ProductsPage({
   return (
     <div className="mx-auto w-full max-w-6xl px-5 py-12 sm:px-8">
       <header className="mb-8">
-        <h1 className="font-serif text-3xl font-semibold text-ink sm:text-4xl">
+        <h1 className="font-serif text-3xl font-semibold text-cream sm:text-4xl">
           {activeCategory ? activeCategory.name : 'Tüm Ürünler'}
         </h1>
         <p className="mt-2 text-muted">
@@ -51,7 +51,7 @@ export default async function ProductsPage({
           ))}
         </div>
       ) : (
-        <div className="mt-12 flex flex-col items-center gap-5 rounded-2xl border border-line bg-paper py-16 text-center">
+        <div className="mt-12 flex flex-col items-center gap-5 rounded-2xl border border-line bg-panel py-16 text-center">
           <p className="max-w-md text-muted">
             Aradığınız kritere uygun ürün bulunamadı. Aradığınız ürünü WhatsApp üzerinden bize
             iletebilirsiniz.

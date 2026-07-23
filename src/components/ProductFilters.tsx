@@ -39,8 +39,8 @@ export function ProductFilters({
   const chipClass = (isActive: boolean) =>
     `whitespace-nowrap rounded-full border px-4 py-2 text-sm font-medium transition ${
       isActive
-        ? 'border-gold bg-gold text-white'
-        : 'border-line bg-paper text-ink hover:border-gold-soft'
+        ? 'border-gold bg-gold text-ink'
+        : 'border-line bg-panel text-cream/85 hover:border-gold/60 hover:text-gold-soft'
     }`
 
   return (
@@ -52,11 +52,11 @@ export function ProductFilters({
           onChange={(e) => setValue(e.target.value)}
           placeholder="Ürün kodu veya adı ile ara..."
           aria-label="Ürün ara"
-          className="w-full rounded-full border border-line bg-paper py-3 pl-12 pr-24 text-sm outline-none transition focus:border-gold"
+          className="w-full rounded-full border border-line bg-panel py-3 pl-12 pr-24 text-sm text-cream outline-none transition placeholder:text-muted focus:border-gold"
         />
         <button
           type="submit"
-          className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded-full bg-ink px-5 py-2 text-sm font-medium text-white transition hover:bg-espresso"
+          className="btn-gold absolute right-1.5 top-1/2 -translate-y-1/2 rounded-full px-5 py-2 text-sm font-semibold"
         >
           Ara
         </button>

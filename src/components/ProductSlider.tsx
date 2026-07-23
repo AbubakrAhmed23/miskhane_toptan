@@ -32,17 +32,16 @@ export function ProductSlider({
 
   if (count === 0) {
     return (
-      <div className="relative aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl border border-line bg-white shadow-soft" />
+      <div className="relative aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl border border-gold/30 bg-paper" />
     )
   }
 
   return (
     <div
-      className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl border border-line bg-white shadow-soft"
+      className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl border border-gold/30 bg-paper shadow-gold"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      {/* Kayan şerit */}
       <div
         className="flex h-full transition-transform duration-700 ease-out motion-reduce:transition-none"
         style={{ transform: `translateX(-${index * 100}%)` }}
@@ -64,8 +63,7 @@ export function ProductSlider({
                 sizes="(max-width: 768px) 90vw, 420px"
                 priority
               />
-              {/* Alt bilgi bandı */}
-              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 bg-gradient-to-t from-ink/75 via-ink/30 to-transparent p-5">
+              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 bg-gradient-to-t from-black/80 via-black/35 to-transparent p-5">
                 <div>
                   <span className="text-xs font-semibold uppercase tracking-wider text-gold-soft">
                     {product.code}
@@ -81,7 +79,6 @@ export function ProductSlider({
         })}
       </div>
 
-      {/* Nokta göstergeleri */}
       {count > 1 && (
         <div className="absolute bottom-4 right-4 flex gap-1.5">
           {products.map((product, i) => (
@@ -92,7 +89,7 @@ export function ProductSlider({
               aria-label={`${i + 1}. ürüne geç`}
               aria-current={i === index}
               className={`h-2 rounded-full transition-all ${
-                i === index ? 'w-5 bg-gold' : 'w-2 bg-cream/60 hover:bg-cream'
+                i === index ? 'w-5 bg-gold' : 'w-2 bg-cream/50 hover:bg-cream'
               }`}
             />
           ))}

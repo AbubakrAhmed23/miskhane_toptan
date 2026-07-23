@@ -8,11 +8,7 @@ import { ProductGallery } from '@/components/ProductGallery'
 import { WhatsAppButton } from '@/components/WhatsAppButton'
 import { ArrowIcon } from '@/components/icons'
 import { firstProductImage, mediaUrl } from '@/lib/media'
-import {
-  getProductBySlug,
-  getRelatedProducts,
-  getSettings,
-} from '@/lib/queries'
+import { getProductBySlug, getRelatedProducts, getSettings } from '@/lib/queries'
 import { productInquiryMessage } from '@/lib/whatsapp'
 
 export async function generateMetadata({
@@ -84,23 +80,23 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       />
 
       <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-muted">
-        <Link href="/" className="hover:text-gold">
+        <Link href="/" className="hover:text-gold-soft">
           Ana Sayfa
         </Link>
-        <span>/</span>
-        <Link href="/urunler" className="hover:text-gold">
+        <span className="text-line">/</span>
+        <Link href="/urunler" className="hover:text-gold-soft">
           Ürünler
         </Link>
         {category && (
           <>
-            <span>/</span>
-            <Link href={`/kategori/${category.slug}`} className="hover:text-gold">
+            <span className="text-line">/</span>
+            <Link href={`/kategori/${category.slug}`} className="hover:text-gold-soft">
               {category.name}
             </Link>
           </>
         )}
-        <span>/</span>
-        <span className="text-ink">{product.code}</span>
+        <span className="text-line">/</span>
+        <span className="text-cream">{product.code}</span>
       </nav>
 
       <div className="grid gap-10 md:grid-cols-2">
@@ -110,16 +106,16 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           {category && (
             <Link
               href={`/kategori/${category.slug}`}
-              className="text-xs font-semibold uppercase tracking-widest text-gold hover:underline"
+              className="text-xs font-semibold uppercase tracking-widest text-gold hover:text-gold-soft"
             >
               {category.name}
             </Link>
           )}
-          <h1 className="mt-2 font-serif text-3xl font-semibold text-ink sm:text-4xl">
+          <h1 className="mt-2 font-serif text-3xl font-semibold text-cream sm:text-4xl">
             {product.title}
           </h1>
           <p className="mt-2 text-sm text-muted">
-            Ürün Kodu: <span className="font-medium text-ink">{product.code}</span>
+            Ürün Kodu: <span className="font-medium text-cream">{product.code}</span>
           </p>
 
           {specs.length > 0 && (
@@ -127,11 +123,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               <table className="w-full text-sm">
                 <tbody>
                   {specs.map((row, i) => (
-                    <tr key={row.label} className={i % 2 === 0 ? 'bg-paper' : 'bg-sand/40'}>
+                    <tr key={row.label} className={i % 2 === 0 ? 'bg-panel' : 'bg-panel-2'}>
                       <th className="w-1/2 px-4 py-3 text-left font-medium text-muted">
                         {row.label}
                       </th>
-                      <td className="px-4 py-3 font-medium text-ink">{row.value}</td>
+                      <td className="px-4 py-3 font-medium text-cream">{row.value}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -139,20 +135,24 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             </div>
           )}
 
-          <div className="mt-6 rounded-xl border border-gold/30 bg-gold/5 p-5">
+          <div className="mt-6 rounded-xl border border-gold/30 bg-gold/10 p-5">
             <p className="text-sm text-muted">
               Fiyat bilgisi ve numune talebi için WhatsApp üzerinden bize ulaşın. Ürün kodunu
-              ({product.code}) belirtmeniz yeterli.
+              (<span className="text-gold-soft">{product.code}</span>) belirtmeniz yeterli.
             </p>
             <div className="mt-4">
-              <WhatsAppButton number={settings?.whatsappNumber} message={message}>
+              <WhatsAppButton
+                number={settings?.whatsappNumber}
+                message={message}
+                className="btn-gold inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-semibold shadow-gold"
+              >
                 Bu Ürün İçin WhatsApp'tan Sor
               </WhatsAppButton>
             </div>
           </div>
 
           {product.description && (
-            <div className="richtext mt-8 text-ink">
+            <div className="richtext mt-8 text-cream/90">
               <RichText data={product.description} />
             </div>
           )}
@@ -160,15 +160,15 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       </div>
 
       {related.length > 0 && (
-        <section className="mt-16">
+        <section className="mt-20">
           <div className="flex items-center justify-between">
-            <h2 className="font-serif text-2xl font-semibold text-ink sm:text-3xl">
+            <h2 className="font-serif text-2xl font-semibold text-cream sm:text-3xl">
               Benzer Ürünler
             </h2>
             {category && (
               <Link
                 href={`/kategori/${category.slug}`}
-                className="inline-flex items-center gap-1 text-sm font-medium text-gold hover:underline"
+                className="inline-flex items-center gap-1 text-sm font-medium text-gold-soft hover:gap-2"
               >
                 Tümü <ArrowIcon className="h-4 w-4" />
               </Link>

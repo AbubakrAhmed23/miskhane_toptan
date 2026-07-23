@@ -11,7 +11,7 @@ export function ProductGallery({ product }: { product: Product }) {
 
   if (images.length === 0) {
     return (
-      <div className="relative aspect-square overflow-hidden rounded-xl border border-line bg-white">
+      <div className="relative aspect-square overflow-hidden rounded-xl border border-line bg-paper">
         <MediaImage media={null} className="" />
       </div>
     )
@@ -19,7 +19,7 @@ export function ProductGallery({ product }: { product: Product }) {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="relative aspect-square overflow-hidden rounded-xl border border-line bg-white">
+      <div className="relative aspect-square overflow-hidden rounded-xl border border-line bg-paper">
         <MediaImage
           media={images[active]}
           size="large"
@@ -37,8 +37,8 @@ export function ProductGallery({ product }: { product: Product }) {
               type="button"
               onClick={() => setActive(i)}
               aria-label={`${i + 1}. görsel`}
-              className={`relative aspect-square overflow-hidden rounded-lg border bg-white transition ${
-                i === active ? 'border-gold ring-1 ring-gold' : 'border-line hover:border-gold-soft'
+              className={`relative aspect-square overflow-hidden rounded-lg border bg-paper transition ${
+                i === active ? 'border-gold ring-1 ring-gold' : 'border-line hover:border-gold/60'
               }`}
             >
               <MediaImage media={img} size="thumbnail" className="object-contain p-1.5" sizes="80px" />

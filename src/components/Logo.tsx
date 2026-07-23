@@ -1,35 +1,33 @@
 import Image from 'next/image'
 
-import type { Setting } from '@/payload-types'
-import { mediaAlt, mediaUrl } from '@/lib/media'
-
 export function Logo({
-  settings,
-  variant = 'dark',
+  showWordmark = true,
+  markSize = 44,
 }: {
-  settings: Setting | null
-  variant?: 'dark' | 'light'
+  showWordmark?: boolean
+  markSize?: number
 }) {
-  const url = mediaUrl(settings?.logo, 'thumbnail')
-  const title = settings?.siteTitle || 'Miskhane Toptan'
-
-  if (url) {
-    return (
+  return (
+    <span className="flex items-center gap-2.5">
       <Image
-        src={url}
-        alt={mediaAlt(settings?.logo, title)}
-        width={180}
-        height={48}
-        className="h-10 w-auto object-contain"
+        src="/brand/logo-mark.png"
+        alt="Miskhane logosu"
+        width={markSize}
+        height={markSize}
+        className="object-contain"
+        style={{ height: markSize, width: markSize }}
         priority
       />
-    )
-  }
-
-  return (
-    <span className={`flex flex-col leading-none ${variant === 'light' ? 'text-cream' : 'text-ink'}`}>
-      <span className="font-serif text-2xl font-semibold tracking-wide">Miskhane</span>
-      <span className="text-[0.62rem] font-semibold uppercase tracking-[0.42em] text-gold">Toptan</span>
+      {showWordmark && (
+        <span className="flex flex-col leading-none">
+          <span className="gold-text font-serif text-xl font-semibold tracking-[0.16em]">
+            MİSKHANE
+          </span>
+          <span className="mt-0.5 text-[0.58rem] font-semibold uppercase tracking-[0.5em] text-cream/60">
+            Toptan
+          </span>
+        </span>
+      )}
     </span>
   )
 }
