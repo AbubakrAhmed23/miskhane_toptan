@@ -2,6 +2,7 @@ import Link from 'next/link'
 
 import type { Category, Setting } from '@/payload-types'
 import { waLink } from '@/lib/whatsapp'
+import { DiamondDivider } from './Decor'
 import { Logo } from './Logo'
 import { MailIcon, PhoneIcon, PinIcon, WhatsAppIcon } from './icons'
 
@@ -16,7 +17,8 @@ export function SiteFooter({
 
   return (
     <footer className="mt-24 bg-petrol-deep text-white/70">
-      <div className="mx-auto grid w-full max-w-6xl gap-10 px-5 py-16 sm:px-8 md:grid-cols-4">
+      <DiamondDivider className="pt-12" />
+      <div className="mx-auto grid w-full max-w-6xl gap-10 px-5 py-12 sm:px-8 md:grid-cols-4">
         <div className="md:col-span-1">
           <Logo onDark />
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/60">

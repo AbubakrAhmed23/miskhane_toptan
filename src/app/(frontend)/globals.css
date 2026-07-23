@@ -134,6 +134,64 @@ img {
   animation: glow-pulse 7s ease-in-out infinite;
 }
 
+/* Dekoratif süsleme hareketleri */
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-16px);
+  }
+}
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(0.75);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.15);
+  }
+}
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-float {
+  animation: float-y 6s ease-in-out infinite;
+}
+.animate-twinkle {
+  animation: twinkle 4.5s ease-in-out infinite;
+}
+.animate-sway {
+  animation: sway 7s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+.animate-spin-slow {
+  animation: spin-slow 44s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-twinkle,
+  .animate-sway,
+  .animate-spin-slow {
+    animation: none;
+  }
+}
+
 /* Açılış: yukarı kayarak belirme */
 @keyframes fade-up {
   from {

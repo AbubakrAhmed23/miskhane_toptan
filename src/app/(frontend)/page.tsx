@@ -1,6 +1,13 @@
 import Link from 'next/link'
 
 import { CategoryShowcase } from '@/components/CategoryShowcase'
+import {
+  CornerFlourish,
+  DiamondDivider,
+  FloatingParticles,
+  ScentWave,
+  SideRail,
+} from '@/components/Decor'
 import { ProductCard } from '@/components/ProductCard'
 import { ProductMarquee } from '@/components/ProductMarquee'
 import { ProductSlider } from '@/components/ProductSlider'
@@ -42,7 +49,18 @@ export default async function HomePage() {
               'radial-gradient(circle, rgba(201,162,75,0.22) 0%, rgba(201,162,75,0.06) 40%, transparent 70%)',
           }}
         />
-        <div className="mx-auto grid w-full max-w-6xl items-center gap-12 px-5 py-20 sm:px-8 md:grid-cols-2 md:py-28">
+        <FloatingParticles className="opacity-70" />
+        <CornerFlourish
+          corner="tl"
+          className="pointer-events-none absolute left-3 top-3 h-16 w-16 text-gold/30 sm:h-24 sm:w-24"
+        />
+        <CornerFlourish
+          corner="tr"
+          className="pointer-events-none absolute right-3 top-3 h-16 w-16 text-gold/30 sm:h-24 sm:w-24"
+        />
+        <SideRail side="left" />
+
+        <div className="relative mx-auto grid w-full max-w-6xl items-center gap-12 px-5 py-20 sm:px-8 md:grid-cols-2 md:py-28">
           <div className="animate-fade-up">
             <span className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-gold">
               Toptan Parfüm Ambalajı
@@ -90,7 +108,9 @@ export default async function HomePage() {
                 strokeLinecap="round"
               />
             </svg>
-            <ProductSlider products={sliderProducts} interval={3000} />
+            <ProductSlider products={sliderProducts} interval={1000} />
+            <ScentWave className="animate-sway pointer-events-none absolute -right-6 top-6 hidden h-32 w-10 text-gold/40 sm:block" />
+            <ScentWave className="animate-sway pointer-events-none absolute -left-4 bottom-8 hidden h-24 w-8 text-gold/30 [animation-delay:1.5s] sm:block" />
           </div>
         </div>
 
@@ -129,6 +149,8 @@ export default async function HomePage() {
           <ProductMarquee products={marqueeProducts} />
         </section>
       )}
+
+      <DiamondDivider className="py-14" />
 
       {/* Kategori showcase (alternatif satırlar + noktalı yol) */}
       <CategoryShowcase categories={categories} />
@@ -174,8 +196,13 @@ export default async function HomePage() {
               'radial-gradient(ellipse at center, rgba(201,162,75,0.18) 0%, transparent 65%)',
           }}
         />
+        <FloatingParticles />
+        <CornerFlourish corner="tl" className="pointer-events-none absolute left-4 top-4 h-16 w-16 text-gold/40 sm:h-24 sm:w-24" />
+        <CornerFlourish corner="tr" className="pointer-events-none absolute right-4 top-4 h-16 w-16 text-gold/40 sm:h-24 sm:w-24" />
+        <CornerFlourish corner="bl" className="pointer-events-none absolute bottom-4 left-4 h-16 w-16 text-gold/40 sm:h-24 sm:w-24" />
+        <CornerFlourish corner="br" className="pointer-events-none absolute bottom-4 right-4 h-16 w-16 text-gold/40 sm:h-24 sm:w-24" />
         <Reveal className="relative mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-5 py-24 text-center sm:px-8">
-          <div className="gold-rule h-0.5 w-24" />
+          <DiamondDivider />
           <h2 className="font-serif text-3xl font-semibold text-white sm:text-5xl">
             Aradığınız ürünü bulamadınız mı?
           </h2>
