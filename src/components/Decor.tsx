@@ -1,5 +1,19 @@
 import type { CSSProperties } from 'react'
 
+import {
+  AmberIcon,
+  CapIcon,
+  CitrusIcon,
+  DropletIcon,
+  FlowerIcon,
+  LavenderIcon,
+  PerfumeBottleIcon,
+  RingValveIcon,
+  RoseIcon,
+  SprayValveIcon,
+  WoodIcon,
+} from './decor-icons'
+
 // Zarif altın süsleme öğeleri — hepsi dekoratiftir (aria-hidden, pointer-events yok).
 
 // Köşe filigranı (arabesk kıvrım). corner: konuma göre döndürülür.
@@ -68,48 +82,86 @@ export function ScentWave({ className = '' }: { className?: string }) {
   )
 }
 
-// Dört köşeli ışıltı yıldızı.
-function Sparkle({ className = '', style }: { className?: string; style?: CSSProperties }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className} style={style}>
-      <path d="M12 0 C 12.6 6.5, 17.5 11.4, 24 12 C 17.5 12.6, 12.6 17.5, 12 24 C 11.4 17.5, 6.5 12.6, 0 12 C 6.5 11.4, 11.4 6.5, 12 0 Z" />
-    </svg>
-  )
-}
+// Süzülen parfüm çizimleri (şişe, valf, kapak, damla, yüzük) + birkaç nokta.
+const ICONS = {
+  bottle: PerfumeBottleIcon,
+  valve: SprayValveIcon,
+  cap: CapIcon,
+  droplet: DropletIcon,
+  ring: RingValveIcon,
+} as const
 
-// Süzülen altın parçacıklar + ışıltılar (sabit konumlar, hidrasyon-güvenli).
 const PARTICLES = [
-  { top: '12%', left: '8%', size: 10, delay: '0s', kind: 'sparkle' },
-  { top: '68%', left: '5%', size: 6, delay: '1.2s', kind: 'dot' },
-  { top: '26%', left: '92%', size: 14, delay: '0.6s', kind: 'sparkle' },
-  { top: '80%', left: '88%', size: 7, delay: '2s', kind: 'dot' },
-  { top: '46%', left: '48%', size: 5, delay: '1.6s', kind: 'dot' },
-  { top: '18%', left: '60%', size: 8, delay: '0.9s', kind: 'sparkle' },
-  { top: '58%', left: '30%', size: 6, delay: '2.4s', kind: 'dot' },
-  { top: '88%', left: '40%', size: 9, delay: '0.3s', kind: 'sparkle' },
+  { top: '14%', left: '7%', size: 26, delay: '0s', kind: 'bottle' },
+  { top: '70%', left: '5%', size: 22, delay: '1.2s', kind: 'droplet' },
+  { top: '24%', left: '90%', size: 30, delay: '0.6s', kind: 'valve' },
+  { top: '78%', left: '87%', size: 24, delay: '2s', kind: 'cap' },
+  { top: '46%', left: '49%', size: 6, delay: '1.6s', kind: 'dot' },
+  { top: '18%', left: '58%', size: 22, delay: '0.9s', kind: 'ring' },
+  { top: '60%', left: '30%', size: 7, delay: '2.4s', kind: 'dot' },
+  { top: '86%', left: '42%', size: 24, delay: '0.3s', kind: 'droplet' },
 ] as const
 
 export function FloatingParticles({ className = '' }: { className?: string }) {
   return (
     <div className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`} aria-hidden="true">
-      {PARTICLES.map((p, i) => (
-        <span
-          key={i}
-          className="absolute animate-float"
-          style={{ top: p.top, left: p.left, animationDelay: p.delay }}
-        >
-          {p.kind === 'sparkle' ? (
-            <Sparkle
+      {PARTICLES.map((p, i) => {
+        const style: CSSProperties = { top: p.top, left: p.left, animationDelay: p.delay }
+        if (p.kind === 'dot') {
+          return (
+            <span key={i} className="absolute animate-float" style={style}>
+              <span
+                className="block animate-twinkle rounded-full bg-gold"
+                style={{ width: p.size, height: p.size, animationDelay: p.delay }}
+              />
+            </span>
+          )
+        }
+        const Icon = ICONS[p.kind]
+        return (
+          <span key={i} className="absolute animate-float" style={style}>
+            <Icon
               className="animate-twinkle text-gold"
               style={{ width: p.size, height: p.size, animationDelay: p.delay }}
             />
-          ) : (
-            <span
-              className="block animate-twinkle rounded-full bg-gold"
-              style={{ width: p.size, height: p.size, animationDelay: p.delay }}
-            />
+          </span>
+        )
+      })}
+    </div>
+  )
+}
+
+// Koku notaları (ingredient) şeridi — üst bölüm ve ürün alanları için.
+const NOTES = [
+  { Icon: RoseIcon, label: 'Gül' },
+  { Icon: WoodIcon, label: 'Oud' },
+  { Icon: AmberIcon, label: 'Amber' },
+  { Icon: FlowerIcon, label: 'Çiçek' },
+  { Icon: CitrusIcon, label: 'Narenciye' },
+  { Icon: LavenderIcon, label: 'Lavanta' },
+] as const
+
+export function IngredientStrip({
+  className = '',
+  showLabels = true,
+}: {
+  className?: string
+  showLabels?: boolean
+}) {
+  return (
+    <div
+      className={`flex flex-wrap items-start justify-center gap-x-8 gap-y-5 sm:gap-x-12 ${className}`}
+      aria-hidden="true"
+    >
+      {NOTES.map(({ Icon, label }) => (
+        <div key={label} className="flex flex-col items-center gap-2 text-gold/80">
+          <Icon className="h-7 w-7 sm:h-8 sm:w-8" />
+          {showLabels && (
+            <span className="text-[0.62rem] font-medium uppercase tracking-[0.25em] text-muted">
+              {label}
+            </span>
           )}
-        </span>
+        </div>
       ))}
     </div>
   )

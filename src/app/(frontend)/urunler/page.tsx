@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 
+import { IngredientStrip } from '@/components/Decor'
 import { ProductCard } from '@/components/ProductCard'
 import { ProductFilters } from '@/components/ProductFilters'
 import { WhatsAppButton } from '@/components/WhatsAppButton'
@@ -43,6 +44,10 @@ export default async function ProductsPage({
       </header>
 
       <ProductFilters categories={categories} activeCategory={categorySlug} search={search} />
+
+      <div className="mt-8 rounded-2xl border border-line bg-soft py-6">
+        <IngredientStrip showLabels={false} />
+      </div>
 
       {products.length > 0 ? (
         <div className="mt-8 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">

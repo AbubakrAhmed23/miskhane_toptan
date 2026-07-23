@@ -5,6 +5,7 @@ import {
   CornerFlourish,
   DiamondDivider,
   FloatingParticles,
+  IngredientStrip,
   ScentWave,
   SideRail,
 } from '@/components/Decor'
@@ -127,6 +128,22 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Koku notaları (ingredient) şeridi */}
+      <section className="border-b border-line bg-soft">
+        <div className="mx-auto max-w-4xl px-5 py-14 text-center sm:px-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-gold">
+            Kokunun Dünyasına Ambalaj
+          </p>
+          <h2 className="mt-2 font-serif text-2xl font-semibold text-ink sm:text-3xl">
+            Her Nota İçin Doğru Şişe
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl text-sm text-muted">
+            Gülden ouda, amberden narenciyeye — her koku ailesine uygun cam ambalaj çözümleri.
+          </p>
+          <IngredientStrip className="mt-9" />
+        </div>
+      </section>
+
       {/* Kayan ürün şeridi */}
       {marqueeProducts.length > 0 && (
         <section className="border-b border-line bg-white py-12">
@@ -157,8 +174,9 @@ export default async function HomePage() {
 
       {/* Öne çıkan ürünler */}
       {featured.length > 0 && (
-        <section className="border-y border-line bg-soft">
-          <div className="mx-auto w-full max-w-6xl px-5 py-20 sm:px-8">
+        <section className="relative overflow-hidden border-y border-line bg-soft">
+          <FloatingParticles className="opacity-40" />
+          <div className="relative mx-auto w-full max-w-6xl px-5 py-20 sm:px-8">
             <Reveal className="flex items-end justify-between gap-4">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.35em] text-gold">
