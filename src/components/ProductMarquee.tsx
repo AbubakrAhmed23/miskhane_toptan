@@ -37,7 +37,7 @@ export function ProductMarquee({
               key={`${product.id}-${i}`}
               href={href}
               aria-label={`${product.title} — ${category?.name ?? 'ürünler'} kategorisine git`}
-              className="group/card relative w-44 shrink-0 overflow-hidden rounded-xl border border-line bg-panel shadow-panel transition hover:border-gold/50 sm:w-52"
+              className="group/card relative w-44 shrink-0 overflow-hidden rounded-xl border border-line bg-white shadow-card transition hover:border-gold/50 sm:w-52"
             >
               <div className="relative aspect-square overflow-hidden bg-paper">
                 <MediaImage
@@ -48,7 +48,7 @@ export function ProductMarquee({
                   sizes="210px"
                 />
                 {category && (
-                  <span className="absolute left-2 top-2 rounded-full bg-black/70 px-2.5 py-1 text-[0.65rem] font-medium text-gold-soft opacity-0 backdrop-blur transition group-hover/card:opacity-100">
+                  <span className="absolute left-2 top-2 rounded-full bg-black/70 px-2.5 py-1 text-[0.65rem] font-medium text-gold opacity-0 backdrop-blur transition group-hover/card:opacity-100">
                     {category.name}
                   </span>
                 )}
@@ -57,7 +57,7 @@ export function ProductMarquee({
                 <span className="text-[0.65rem] font-semibold uppercase tracking-wider text-gold">
                   {product.code}
                 </span>
-                <p className="truncate font-serif text-sm font-semibold text-cream">
+                <p className="truncate font-serif text-sm font-semibold text-ink">
                   {product.title}
                 </p>
               </div>
@@ -66,8 +66,8 @@ export function ProductMarquee({
         })}
       </div>
 
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-night to-transparent sm:w-24" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-night to-transparent sm:w-24" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-white to-transparent sm:w-24" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-white to-transparent sm:w-24" />
     </div>
   )
 }

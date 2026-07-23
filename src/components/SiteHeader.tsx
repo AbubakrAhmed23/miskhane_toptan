@@ -35,8 +35,8 @@ export function SiteHeader({ settings }: { settings: Setting | null }) {
     <header
       className={`sticky top-0 z-40 border-b transition-colors duration-300 ${
         scrolled
-          ? 'border-line bg-night/90 backdrop-blur'
-          : 'border-transparent bg-night/70 backdrop-blur-sm'
+          ? 'border-line bg-white/90 backdrop-blur'
+          : 'border-transparent bg-white/70 backdrop-blur-sm'
       }`}
     >
       <div className="mx-auto flex h-[76px] w-full max-w-6xl items-center justify-between px-5 sm:px-8">
@@ -50,7 +50,7 @@ export function SiteHeader({ settings }: { settings: Setting | null }) {
               key={item.href}
               href={item.href}
               className={`group relative text-sm font-medium tracking-wide transition-colors ${
-                isActive(item.href) ? 'text-gold-soft' : 'text-cream/85 hover:text-gold-soft'
+                isActive(item.href) ? 'text-gold' : 'text-ink/80 hover:text-gold'
               }`}
             >
               {item.label}
@@ -67,7 +67,7 @@ export function SiteHeader({ settings }: { settings: Setting | null }) {
           href={waLink(settings?.whatsappNumber, settings?.whatsappDefaultMessage)}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-gold hidden items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold shadow-gold md:inline-flex"
+          className="btn-gold hidden items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold shadow-soft md:inline-flex"
         >
           <WhatsAppIcon className="h-4 w-4" />
           WhatsApp
@@ -75,7 +75,7 @@ export function SiteHeader({ settings }: { settings: Setting | null }) {
 
         <button
           type="button"
-          className="text-cream md:hidden"
+          className="text-ink md:hidden"
           onClick={() => setOpen(true)}
           aria-label="Menüyü aç"
         >
@@ -90,11 +90,11 @@ export function SiteHeader({ settings }: { settings: Setting | null }) {
             onClick={() => setOpen(false)}
             aria-hidden="true"
           />
-          <div className="absolute right-0 top-0 flex h-full w-72 max-w-[82%] flex-col border-l border-line bg-night p-6 shadow-panel">
+          <div className="absolute right-0 top-0 flex h-full w-72 max-w-[82%] flex-col border-l border-line bg-white p-6 shadow-card">
             <div className="flex items-center justify-between">
               <Logo />
               <button type="button" onClick={() => setOpen(false)} aria-label="Menüyü kapat">
-                <CloseIcon className="h-6 w-6 text-cream" />
+                <CloseIcon className="h-6 w-6 text-ink" />
               </button>
             </div>
             <nav className="mt-10 flex flex-col gap-1">
@@ -105,8 +105,8 @@ export function SiteHeader({ settings }: { settings: Setting | null }) {
                   onClick={() => setOpen(false)}
                   className={`rounded-lg px-3 py-3 text-base font-medium transition ${
                     isActive(item.href)
-                      ? 'bg-panel text-gold-soft'
-                      : 'text-cream/85 hover:bg-panel'
+                      ? 'bg-white text-gold'
+                      : 'text-ink/80 hover:bg-white'
                   }`}
                 >
                   {item.label}

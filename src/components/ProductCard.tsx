@@ -11,7 +11,7 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <Link
       href={`/urun/${product.slug}`}
-      className="group flex flex-col overflow-hidden rounded-xl border border-line bg-panel shadow-panel transition duration-300 hover:-translate-y-1 hover:border-gold/50"
+      className="group flex flex-col overflow-hidden rounded-xl border border-line bg-white shadow-card transition duration-300 hover:-translate-y-1 hover:border-gold/50"
     >
       <div className="relative aspect-square overflow-hidden bg-paper">
         <MediaImage
@@ -25,7 +25,7 @@ export function ProductCard({ product }: { product: Product }) {
         <span className="text-xs font-semibold uppercase tracking-wider text-gold">
           {product.code}
         </span>
-        <h3 className="font-serif text-lg font-semibold leading-tight text-cream">
+        <h3 className="font-serif text-lg font-semibold leading-tight text-ink">
           {product.title}
         </h3>
         <div className="mt-auto flex flex-wrap items-center gap-x-2 gap-y-1 pt-2 text-xs text-muted">

@@ -3,9 +3,11 @@ import Image from 'next/image'
 export function Logo({
   showWordmark = true,
   markSize = 44,
+  onDark = false,
 }: {
   showWordmark?: boolean
   markSize?: number
+  onDark?: boolean
 }) {
   return (
     <span className="flex items-center gap-2.5">
@@ -20,10 +22,14 @@ export function Logo({
       />
       {showWordmark && (
         <span className="flex flex-col leading-none">
-          <span className="gold-text font-serif text-xl font-semibold tracking-[0.16em]">
+          <span
+            className={`font-serif text-xl font-bold tracking-[0.14em] ${
+              onDark ? 'text-white' : 'text-petrol'
+            }`}
+          >
             MİSKHANE
           </span>
-          <span className="mt-0.5 text-[0.58rem] font-semibold uppercase tracking-[0.5em] text-cream/60">
+          <span className="mt-0.5 text-[0.58rem] font-semibold uppercase tracking-[0.5em] text-gold">
             Toptan
           </span>
         </span>

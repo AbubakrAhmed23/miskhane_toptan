@@ -12,7 +12,7 @@ export function CategoryShowcase({ categories }: { categories: Category[] }) {
     <section className="relative mx-auto w-full max-w-6xl px-5 py-20 sm:px-8">
       <Reveal className="mx-auto max-w-2xl text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.35em] text-gold">Ürün Grupları</p>
-        <h2 className="mt-3 font-serif text-3xl font-semibold text-cream sm:text-4xl md:text-5xl">
+        <h2 className="mt-3 font-serif text-3xl font-semibold text-ink sm:text-4xl md:text-5xl">
           Kategorilerimizi Keşfedin
         </h2>
         <p className="mt-4 text-muted">
@@ -44,7 +44,7 @@ export function CategoryShowcase({ categories }: { categories: Category[] }) {
                 {/* Düğüm */}
                 <span
                   aria-hidden="true"
-                  className="absolute left-1/2 top-1/2 z-10 hidden h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-gold/60 bg-night font-serif text-sm font-semibold text-gold-soft shadow-gold md:flex"
+                  className="absolute left-1/2 top-1/2 z-10 hidden h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-gold/60 bg-white font-serif text-sm font-semibold text-gold shadow-soft md:flex"
                 >
                   {String(i + 1).padStart(2, '0')}
                 </span>
@@ -53,7 +53,7 @@ export function CategoryShowcase({ categories }: { categories: Category[] }) {
                 <div className={imageFirst ? 'md:order-1' : 'md:order-2'}>
                   <Link
                     href={`/kategori/${category.slug}`}
-                    className="group relative block overflow-hidden rounded-2xl border border-line bg-paper shadow-panel transition duration-300 hover:border-gold/50"
+                    className="group relative block overflow-hidden rounded-2xl border border-line bg-paper shadow-card transition duration-300 hover:border-gold/50"
                   >
                     <div className="relative aspect-[5/4]">
                       <MediaImage
@@ -63,7 +63,7 @@ export function CategoryShowcase({ categories }: { categories: Category[] }) {
                         className="object-cover transition duration-500 group-hover:scale-105"
                         sizes="(max-width: 768px) 90vw, 480px"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-night/50 to-transparent opacity-0 transition group-hover:opacity-100" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-white/50 to-transparent opacity-0 transition group-hover:opacity-100" />
                     </div>
                   </Link>
                 </div>
@@ -72,7 +72,7 @@ export function CategoryShowcase({ categories }: { categories: Category[] }) {
                 <div
                   className={`${imageFirst ? 'md:order-2 md:pl-10' : 'md:order-1 md:pr-10 md:text-right'}`}
                 >
-                  <h3 className="font-serif text-2xl font-semibold text-cream sm:text-3xl">
+                  <h3 className="font-serif text-2xl font-semibold text-ink sm:text-3xl">
                     {category.name}
                   </h3>
                   <div
@@ -84,7 +84,7 @@ export function CategoryShowcase({ categories }: { categories: Category[] }) {
                   </p>
                   <Link
                     href={`/kategori/${category.slug}`}
-                    className={`mt-5 inline-flex items-center gap-2 text-sm font-semibold text-gold-soft transition hover:gap-3 ${
+                    className={`mt-5 inline-flex items-center gap-2 text-sm font-semibold text-gold transition hover:gap-3 ${
                       imageFirst ? '' : 'md:flex-row-reverse'
                     }`}
                   >

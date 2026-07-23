@@ -1,33 +1,33 @@
 @import 'tailwindcss';
 
 @theme {
-  /* Siyah + Gold marka paleti */
-  --color-night: #0a0a0b; /* sayfa zemini */
-  --color-night-2: #0e0e10; /* alternatif koyu bölüm */
-  --color-panel: #151318; /* kartlar */
-  --color-panel-2: #1c1922; /* daha açık panel */
-  --color-cream: #f5efe2; /* birincil açık metin */
-  --color-muted: #9a9284; /* ikincil metin (koyu üzerinde) */
-  --color-gold: #c9a24b; /* ana altın */
-  --color-gold-soft: #ecd08a; /* açık altın (vurgu) */
-  --color-gold-deep: #9c7c2f; /* koyu altın */
-  --color-line: #2a2630; /* koyu üzerinde ince çizgi */
-  --color-ink: #14110b; /* koyu metin (altın/beyaz üzerinde) */
-  --color-paper: #f4f0e8; /* ürün görseli açık zemini */
+  /* Erbatur aynası: beyaz + petrol/teal + altın */
+  --color-soft: #f4f7f8; /* açık bölüm zemini */
+  --color-petrol: #003a4b; /* ana marka koyu (teal) */
+  --color-petrol-deep: #02171d; /* en koyu (footer/CTA) */
+  --color-ink: #202a2e; /* gövde metni */
+  --color-muted: #63727a; /* ikincil metin */
+  --color-gold: #c38a3b; /* vurgu (altın/bronz) */
+  --color-gold-deep: #a06f2b;
+  --color-blue: #5790a0; /* ikincil vurgu */
+  --color-line: #e4e9ea; /* çizgiler/kenarlar */
+  --color-cream: #ffffff; /* koyu bölümlerde açık metin/öğe */
+  --color-paper: #ffffff; /* ürün görseli zemini */
   --color-whatsapp: #25d366;
   --color-whatsapp-dark: #1da851;
 
-  --font-serif: var(--font-cormorant), Georgia, 'Times New Roman', serif;
-  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  /* Mada — Erbatur'un ana yazı tipi (her yerde) */
+  --font-sans: var(--font-mada), system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-mada), system-ui, -apple-system, sans-serif;
 
-  --shadow-gold: 0 10px 40px -12px rgba(201, 162, 75, 0.35);
-  --shadow-panel: 0 1px 2px rgba(0, 0, 0, 0.4), 0 18px 40px -20px rgba(0, 0, 0, 0.7);
+  --shadow-soft: 0 1px 2px rgba(0, 58, 75, 0.05), 0 12px 30px -14px rgba(0, 58, 75, 0.18);
+  --shadow-card: 0 1px 3px rgba(0, 58, 75, 0.07), 0 16px 40px -24px rgba(0, 58, 75, 0.25);
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 * {
@@ -42,8 +42,8 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--color-night);
-  color: var(--color-cream);
+  background: #ffffff;
+  color: var(--color-ink);
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.6;
@@ -58,12 +58,12 @@ img {
 
 ::selection {
   background: var(--color-gold);
-  color: var(--color-ink);
+  color: #ffffff;
 }
 
-/* Altın gradyan metin (başlık vurguları + wordmark) */
+/* Altın vurgu metni (başlık aksanı) */
 .gold-text {
-  background: linear-gradient(180deg, #f6e2a6 0%, #d9b45e 45%, #a07f2e 100%);
+  background: linear-gradient(180deg, #d9a441 0%, #c38a3b 55%, #a06f2b 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -71,27 +71,37 @@ img {
 
 /* İnce altın çizgi */
 .gold-rule {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-gold), transparent);
 }
 
 /* Altın parıltılı birincil buton */
 .btn-gold {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #e6c477, #c9a24b 55%, #a97f2b);
-  color: var(--color-ink);
+  background: linear-gradient(135deg, #d3a04a, #c38a3b 55%, #a06f2b);
+  color: #ffffff;
 }
 .btn-gold::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.55) 50%, transparent 70%);
+  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%);
   transform: translateX(-120%);
   transition: transform 0.8s var(--ease-out);
 }
 .btn-gold:hover::after {
   transform: translateX(120%);
+}
+
+/* Petrol (teal) buton */
+.btn-petrol {
+  background: var(--color-petrol);
+  color: #ffffff;
+  transition: background 0.25s var(--ease-out);
+}
+.btn-petrol:hover {
+  background: var(--color-petrol-deep);
 }
 
 /* Kayan ürün şeridi (marquee) */
@@ -108,20 +118,20 @@ img {
   will-change: transform;
 }
 
-/* Yavaş altın parıltı (hero halesi) */
+/* Yumuşak hale nabzı */
 @keyframes glow-pulse {
   0%,
   100% {
-    opacity: 0.5;
+    opacity: 0.45;
     transform: scale(1);
   }
   50% {
-    opacity: 0.85;
-    transform: scale(1.08);
+    opacity: 0.75;
+    transform: scale(1.06);
   }
 }
 .animate-glow {
-  animation: glow-pulse 6s ease-in-out infinite;
+  animation: glow-pulse 7s ease-in-out infinite;
 }
 
 /* Açılış: yukarı kayarak belirme */
@@ -139,7 +149,7 @@ img {
   animation: fade-up 0.7s var(--ease-out) both;
 }
 
-/* Kaydırdıkça belirme (scroll reveal) */
+/* Kaydırdıkça belirme */
 .reveal {
   opacity: 0;
   transform: translateY(22px);
@@ -168,23 +178,23 @@ img {
   }
 }
 
-/* Zengin metin (Payload richText) çıktısı */
+/* Zengin metin (Payload richText) */
 .richtext > * {
   margin: 0 0 1rem;
 }
 .richtext h2 {
   font-family: var(--font-serif);
   font-size: 1.6rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-top: 1.5rem;
-  color: var(--color-cream);
+  color: var(--color-petrol);
 }
 .richtext h3 {
   font-family: var(--font-serif);
   font-size: 1.3rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-top: 1.25rem;
-  color: var(--color-cream);
+  color: var(--color-petrol);
 }
 .richtext ul {
   list-style: disc;
@@ -195,6 +205,6 @@ img {
   padding-left: 1.25rem;
 }
 .richtext a {
-  color: var(--color-gold-soft);
+  color: var(--color-gold-deep);
   text-decoration: underline;
 }

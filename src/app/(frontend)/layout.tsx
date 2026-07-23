@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Cormorant_Garamond, Inter } from 'next/font/google'
+import { Mada } from 'next/font/google'
 import React from 'react'
 
 import { SiteFooter } from '@/components/SiteFooter'
@@ -8,16 +8,11 @@ import { WhatsAppFloat } from '@/components/WhatsAppFloat'
 import { getCategories, getSettings } from '@/lib/queries'
 import './globals.css'
 
-const serif = Cormorant_Garamond({
+// Mada — Erbatur'un ana yazı tipi
+const mada = Mada({
   subsets: ['latin', 'latin-ext'],
-  weight: ['500', '600', '700'],
-  variable: '--font-cormorant',
-  display: 'swap',
-})
-
-const sans = Inter({
-  subsets: ['latin', 'latin-ext'],
-  variable: '--font-inter',
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-mada',
   display: 'swap',
 })
 
@@ -55,7 +50,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const [settings, categories] = await Promise.all([getSettings(), getCategories()])
 
   return (
-    <html lang="tr" className={`${serif.variable} ${sans.variable}`}>
+    <html lang="tr" className={mada.variable}>
       <body className="flex min-h-screen flex-col">
         <SiteHeader settings={settings} />
         <main className="flex-1">{children}</main>

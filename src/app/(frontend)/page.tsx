@@ -32,7 +32,7 @@ export default async function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-night">
+      <section className="relative overflow-hidden bg-white">
         {/* Altın hale */}
         <div
           aria-hidden="true"
@@ -44,10 +44,10 @@ export default async function HomePage() {
         />
         <div className="mx-auto grid w-full max-w-6xl items-center gap-12 px-5 py-20 sm:px-8 md:grid-cols-2 md:py-28">
           <div className="animate-fade-up">
-            <span className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-panel px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-gold-soft">
+            <span className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-gold">
               Toptan Parfüm Ambalajı
             </span>
-            <h1 className="mt-6 font-serif text-5xl font-semibold leading-[1.05] text-cream sm:text-6xl md:text-7xl">
+            <h1 className="mt-6 font-serif text-5xl font-semibold leading-[1.05] text-ink sm:text-6xl md:text-7xl">
               Parfüm Ambalajında <span className="gold-text">Zarafet</span>
             </h1>
             <p className="mt-6 max-w-lg text-base leading-relaxed text-muted sm:text-lg">
@@ -59,14 +59,14 @@ export default async function HomePage() {
                 href={wa}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-gold inline-flex items-center gap-2 rounded-full px-7 py-3.5 font-semibold shadow-gold"
+                className="btn-gold inline-flex items-center gap-2 rounded-full px-7 py-3.5 font-semibold shadow-soft"
               >
                 <WhatsAppIcon className="h-5 w-5" />
                 WhatsApp ile İletişime Geç
               </a>
               <Link
                 href="/urunler"
-                className="inline-flex items-center gap-2 rounded-full border border-cream/25 px-7 py-3.5 font-medium text-cream transition hover:border-gold hover:text-gold-soft"
+                className="inline-flex items-center gap-2 rounded-full border border-line px-7 py-3.5 font-medium text-ink transition hover:border-gold hover:text-gold"
               >
                 Ürünleri Keşfet
                 <ArrowIcon className="h-4 w-4" />
@@ -95,14 +95,12 @@ export default async function HomePage() {
         </div>
 
         {/* Stat bandı */}
-        <div className="border-t border-line bg-night-2">
+        <div className="bg-petrol">
           <div className="mx-auto grid w-full max-w-6xl grid-cols-2 gap-6 px-5 py-10 sm:px-8 md:grid-cols-4">
             {stats.map((s) => (
               <div key={s.label} className="text-center md:text-left">
-                <div className="gold-text font-serif text-4xl font-semibold sm:text-5xl">
-                  {s.value}
-                </div>
-                <div className="mt-1 text-sm text-muted">{s.label}</div>
+                <div className="font-serif text-4xl font-bold text-gold sm:text-5xl">{s.value}</div>
+                <div className="mt-1 text-sm text-white/70">{s.label}</div>
               </div>
             ))}
           </div>
@@ -111,19 +109,19 @@ export default async function HomePage() {
 
       {/* Kayan ürün şeridi */}
       {marqueeProducts.length > 0 && (
-        <section className="border-b border-line bg-night py-12">
+        <section className="border-b border-line bg-white py-12">
           <div className="mx-auto mb-6 flex w-full max-w-6xl items-end justify-between gap-4 px-5 sm:px-8">
             <Reveal>
               <p className="text-xs font-semibold uppercase tracking-[0.35em] text-gold">
                 Vitrin
               </p>
-              <h2 className="mt-2 font-serif text-2xl font-semibold text-cream sm:text-3xl">
+              <h2 className="mt-2 font-serif text-2xl font-semibold text-ink sm:text-3xl">
                 Ürünlerimizden
               </h2>
             </Reveal>
             <Link
               href="/urunler"
-              className="hidden items-center gap-1 text-sm font-medium text-gold-soft hover:gap-2 sm:inline-flex"
+              className="hidden items-center gap-1 text-sm font-medium text-gold hover:gap-2 sm:inline-flex"
             >
               Tüm Ürünler <ArrowIcon className="h-4 w-4" />
             </Link>
@@ -137,20 +135,20 @@ export default async function HomePage() {
 
       {/* Öne çıkan ürünler */}
       {featured.length > 0 && (
-        <section className="border-y border-line bg-night-2">
+        <section className="border-y border-line bg-soft">
           <div className="mx-auto w-full max-w-6xl px-5 py-20 sm:px-8">
             <Reveal className="flex items-end justify-between gap-4">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.35em] text-gold">
                   Seçkin
                 </p>
-                <h2 className="mt-2 font-serif text-3xl font-semibold text-cream sm:text-4xl">
+                <h2 className="mt-2 font-serif text-3xl font-semibold text-ink sm:text-4xl">
                   Öne Çıkan Ürünler
                 </h2>
               </div>
               <Link
                 href="/urunler"
-                className="hidden items-center gap-1 text-sm font-medium text-gold-soft hover:gap-2 sm:inline-flex"
+                className="hidden items-center gap-1 text-sm font-medium text-gold hover:gap-2 sm:inline-flex"
               >
                 Tüm Ürünler <ArrowIcon className="h-4 w-4" />
               </Link>
@@ -167,21 +165,21 @@ export default async function HomePage() {
       )}
 
       {/* CTA bandı */}
-      <section className="relative overflow-hidden bg-night">
+      <section className="relative overflow-hidden bg-petrol-deep">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-60"
+          className="pointer-events-none absolute inset-0 opacity-70"
           style={{
             background:
-              'radial-gradient(ellipse at center, rgba(201,162,75,0.16) 0%, transparent 65%)',
+              'radial-gradient(ellipse at center, rgba(201,162,75,0.18) 0%, transparent 65%)',
           }}
         />
         <Reveal className="relative mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-5 py-24 text-center sm:px-8">
-          <div className="gold-rule h-px w-24" />
-          <h2 className="font-serif text-3xl font-semibold text-cream sm:text-5xl">
+          <div className="gold-rule h-0.5 w-24" />
+          <h2 className="font-serif text-3xl font-semibold text-white sm:text-5xl">
             Aradığınız ürünü bulamadınız mı?
           </h2>
-          <p className="max-w-xl text-muted">
+          <p className="max-w-xl text-white/70">
             Ürün kataloğumuz sürekli genişliyor. İhtiyacınızı WhatsApp üzerinden iletin, size en
             uygun çözümü sunalım.
           </p>
@@ -189,7 +187,7 @@ export default async function HomePage() {
             href={wa}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-gold mt-2 inline-flex items-center gap-2 rounded-full px-8 py-4 font-semibold shadow-gold"
+            className="btn-gold mt-2 inline-flex items-center gap-2 rounded-full px-8 py-4 font-semibold shadow-soft"
           >
             <WhatsAppIcon className="h-5 w-5" />
             Hemen İletişime Geçin

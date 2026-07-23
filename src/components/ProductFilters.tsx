@@ -40,7 +40,7 @@ export function ProductFilters({
     `whitespace-nowrap rounded-full border px-4 py-2 text-sm font-medium transition ${
       isActive
         ? 'border-gold bg-gold text-ink'
-        : 'border-line bg-panel text-cream/85 hover:border-gold/60 hover:text-gold-soft'
+        : 'border-line bg-white text-ink/80 hover:border-gold/60 hover:text-gold'
     }`
 
   return (
@@ -52,7 +52,7 @@ export function ProductFilters({
           onChange={(e) => setValue(e.target.value)}
           placeholder="Ürün kodu veya adı ile ara..."
           aria-label="Ürün ara"
-          className="w-full rounded-full border border-line bg-panel py-3 pl-12 pr-24 text-sm text-cream outline-none transition placeholder:text-muted focus:border-gold"
+          className="w-full rounded-full border border-line bg-white py-3 pl-12 pr-24 text-sm text-ink outline-none transition placeholder:text-muted focus:border-gold"
         />
         <button
           type="submit"

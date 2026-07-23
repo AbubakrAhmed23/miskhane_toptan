@@ -31,7 +31,7 @@ export function MediaImage({
 
   if (!url) {
     return (
-      <div className={`flex items-center justify-center bg-panel-2 text-muted ${className ?? ''}`}>
+      <div className={`flex items-center justify-center bg-soft text-muted ${className ?? ''}`}>
         <span className="font-serif text-sm">Görsel yok</span>
       </div>
     )
