@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
@@ -15,11 +14,9 @@ function categoryOf(product: Product): Category | null {
 export function ProductSlider({
   products,
   interval = 3000,
-  heroSrc,
 }: {
   products: Product[]
   interval?: number
-  heroSrc?: Record<number, string>
 }) {
   const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
@@ -35,13 +32,13 @@ export function ProductSlider({
 
   if (count === 0) {
     return (
-      <div className="relative aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl border border-gold/30 bg-paper" />
+      <div className="relative aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl border border-gold/30 bg-white" />
     )
   }
 
   return (
     <div
-      className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl border border-gold/30 bg-paper shadow-soft"
+      className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl border border-line bg-white shadow-soft"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -58,30 +55,17 @@ export function ProductSlider({
               className="relative block h-full w-full shrink-0"
               aria-label={`${product.code} — ${product.title}`}
             >
-              {heroSrc?.[product.id] ? (
-                <Image
-                  src={heroSrc[product.id]}
-                  alt={product.title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 90vw, 420px"
-                  priority
-                />
-              ) : (
-                <MediaImage
-                  media={firstProductImage(product)}
-                  size="large"
-                  alt={product.title}
-                  className="object-contain p-8"
-                  sizes="(max-width: 768px) 90vw, 420px"
-                  priority
-                />
-              )}
-              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 bg-gradient-to-t from-black/80 via-black/35 to-transparent p-5">
+              <MediaImage
+                media={firstProductImage(product)}
+                size="large"
+                alt={product.title}
+                className="object-cover"
+                sizes="(max-width: 768px) 90vw, 420px"
+                priority
+              />
+              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 bg-gradient-to-t from-black/75 via-black/25 to-transparent p-5">
                 <div>
-                  <span className="text-xs font-semibold uppercase tracking-wider text-gold">
-                    {product.code}
-                  </span>
+                  <span className="code text-xs font-medium text-gold">{product.code}</span>
                   <p className="font-serif text-lg font-semibold leading-tight text-white">
                     {product.title}
                   </p>
@@ -103,7 +87,7 @@ export function ProductSlider({
               aria-label={`${i + 1}. ürüne geç`}
               aria-current={i === index}
               className={`h-2 rounded-full transition-all ${
-                i === index ? 'w-5 bg-gold' : 'w-2 bg-white/50 hover:bg-white'
+                i === index ? 'w-5 bg-gold' : 'w-2 bg-white/60 hover:bg-white'
               }`}
             />
           ))}
