@@ -22,14 +22,12 @@ export function ProductCard({ product }: { product: Product }) {
         />
       </div>
       <div className="flex flex-1 flex-col gap-1 border-t border-line p-4">
-        <span className="text-xs font-semibold uppercase tracking-wider text-gold">
-          {product.code}
-        </span>
+        <span className="code text-xs font-medium text-gold-deep">{product.code}</span>
         <h3 className="font-serif text-lg font-semibold leading-tight text-ink">
           {product.title}
         </h3>
         <div className="mt-auto flex flex-wrap items-center gap-x-2 gap-y-1 pt-2 text-xs text-muted">
-          {product.capacityMl ? <span>{product.capacityMl} ml</span> : null}
+          {product.capacityMl ? <span className="code">{product.capacityMl} ml</span> : null}
           {product.capacityMl && category ? <span aria-hidden="true">·</span> : null}
           {category ? <span>{category.name}</span> : null}
         </div>

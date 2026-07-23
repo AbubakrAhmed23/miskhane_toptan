@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Mada } from 'next/font/google'
+import { JetBrains_Mono, Mada } from 'next/font/google'
 import React from 'react'
 
 import { SiteFooter } from '@/components/SiteFooter'
@@ -8,11 +8,19 @@ import { WhatsAppFloat } from '@/components/WhatsAppFloat'
 import { getCategories, getSettings } from '@/lib/queries'
 import './globals.css'
 
-// Mada — Erbatur'un ana yazı tipi
+// Mada — ana yazı tipi (Erbatur aynası)
 const mada = Mada({
   subsets: ['latin', 'latin-ext'],
   weight: ['400', '500', '600', '700', '800'],
   variable: '--font-mada',
+  display: 'swap',
+})
+
+// JetBrains Mono — ürün kodları ve teknik veriler için "utility" yazı tipi
+const jbmono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  variable: '--font-jbmono',
   display: 'swap',
 })
 
@@ -50,7 +58,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const [settings, categories] = await Promise.all([getSettings(), getCategories()])
 
   return (
-    <html lang="tr" className={mada.variable}>
+    <html lang="tr" className={`${mada.variable} ${jbmono.variable}`}>
       <body className="flex min-h-screen flex-col">
         <SiteHeader settings={settings} />
         <main className="flex-1">{children}</main>

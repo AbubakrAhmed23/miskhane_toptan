@@ -27,6 +27,23 @@ export const getCategories = cache(async (): Promise<Category[]> => {
   return docs
 })
 
+export const getCategoriesWithCounts = cache(
+  async (): Promise<Array<Category & { productCount: number }>> => {
+    const payload = await getPayloadClient()
+    const categories = await getCategories()
+    const withCounts = await Promise.all(
+      categories.map(async (c) => {
+        const res = await payload.count({
+          collection: 'products',
+          where: { and: [{ category: { equals: c.id } }, { active: { equals: true } }] },
+        })
+        return { ...c, productCount: res.totalDocs }
+      }),
+    )
+    return withCounts
+  },
+)
+
 export const getCategoryBySlug = cache(async (slug: string): Promise<Category | null> => {
   const payload = await getPayloadClient()
   const { docs } = await payload.find({
