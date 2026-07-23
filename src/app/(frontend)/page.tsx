@@ -1,3 +1,6 @@
+import fs from 'fs'
+import path from 'path'
+
 import Link from 'next/link'
 
 import { CollectionIndex } from '@/components/CollectionIndex'
@@ -26,6 +29,15 @@ export default async function HomePage() {
   const marqueeProducts = catalog.docs
   const sliderProducts = featured.length > 0 ? featured : marqueeProducts
   const totalProducts = catalog.totalDocs
+
+  // Mermer zeminli hero görselleri (public/hero/<slug>.webp) — varsa slider'da kullanılır
+  const heroDir = path.join(process.cwd(), 'public', 'hero')
+  const heroFiles = new Set(fs.existsSync(heroDir) ? fs.readdirSync(heroDir) : [])
+  const heroSrc: Record<number, string> = {}
+  for (const p of sliderProducts) {
+    const file = `${p.slug}.webp`
+    if (p.slug && heroFiles.has(file)) heroSrc[p.id] = `/hero/${file}`
+  }
 
   const stats = [
     { value: `${totalProducts}+`, label: 'Ürün Çeşidi' },
@@ -79,7 +91,7 @@ export default async function HomePage() {
           </div>
 
           <div className="relative animate-fade-up [animation-delay:150ms]">
-            <ProductSlider products={sliderProducts} interval={1000} />
+            <ProductSlider products={sliderProducts} interval={1000} heroSrc={heroSrc} />
             <ScentWave className="animate-sway pointer-events-none absolute -right-5 top-6 hidden h-32 w-9 text-gold/35 sm:block" />
           </div>
         </div>

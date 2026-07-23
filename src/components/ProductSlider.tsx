@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
@@ -14,9 +15,11 @@ function categoryOf(product: Product): Category | null {
 export function ProductSlider({
   products,
   interval = 3000,
+  heroSrc,
 }: {
   products: Product[]
   interval?: number
+  heroSrc?: Record<number, string>
 }) {
   const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
@@ -55,14 +58,25 @@ export function ProductSlider({
               className="relative block h-full w-full shrink-0"
               aria-label={`${product.code} — ${product.title}`}
             >
-              <MediaImage
-                media={firstProductImage(product)}
-                size="large"
-                alt={product.title}
-                className="object-contain p-8"
-                sizes="(max-width: 768px) 90vw, 420px"
-                priority
-              />
+              {heroSrc?.[product.id] ? (
+                <Image
+                  src={heroSrc[product.id]}
+                  alt={product.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 90vw, 420px"
+                  priority
+                />
+              ) : (
+                <MediaImage
+                  media={firstProductImage(product)}
+                  size="large"
+                  alt={product.title}
+                  className="object-contain p-8"
+                  sizes="(max-width: 768px) 90vw, 420px"
+                  priority
+                />
+              )}
               <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 bg-gradient-to-t from-black/80 via-black/35 to-transparent p-5">
                 <div>
                   <span className="text-xs font-semibold uppercase tracking-wider text-gold">

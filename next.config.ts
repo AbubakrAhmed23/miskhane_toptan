@@ -15,6 +15,9 @@ const nextConfig: NextConfig = {
       {
         pathname: '/brand/**',
       },
+      {
+        pathname: '/hero/**',
+      },
     ],
   },
   webpack: (webpackConfig) => {
