@@ -148,6 +148,14 @@ export interface Product {
   neckSize?: string | null;
   material?: string | null;
   finish?: string | null;
+  /**
+   * Bir kolideki ürün adedi.
+   */
+  unitsPerBox?: number | null;
+  /**
+   * Palet/parti başına koli sayısı (katalog bilgisi).
+   */
+  boxCount?: number | null;
   minOrder?: number | null;
   orderUnit?: ('adet' | 'koli' | 'palet') | null;
   description?: {
@@ -380,6 +388,8 @@ export interface ProductsSelect<T extends boolean = true> {
   neckSize?: T;
   material?: T;
   finish?: T;
+  unitsPerBox?: T;
+  boxCount?: T;
   minOrder?: T;
   orderUnit?: T;
   description?: T;

@@ -55,6 +55,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     product.neckSize ? { label: 'Ağız / Diş Ölçüsü', value: product.neckSize } : null,
     product.material ? { label: 'Malzeme', value: product.material } : null,
     product.finish ? { label: 'Renk / Kaplama', value: product.finish } : null,
+    product.unitsPerBox ? { label: 'Koli İçi Adet', value: `${product.unitsPerBox} adet` } : null,
     product.minOrder
       ? { label: 'Minimum Alım', value: `${product.minOrder} ${product.orderUnit ?? 'adet'}` }
       : null,

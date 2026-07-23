@@ -95,6 +95,23 @@ export const Products: CollectionConfig = {
         {
           type: 'row',
           fields: [
+            {
+              name: 'unitsPerBox',
+              label: 'Koli İçi Adet',
+              type: 'number',
+              admin: { width: '50%', description: 'Bir kolideki ürün adedi.' },
+            },
+            {
+              name: 'boxCount',
+              label: 'Koli Adedi',
+              type: 'number',
+              admin: { width: '50%', description: 'Palet/parti başına koli sayısı (katalog bilgisi).' },
+            },
+          ],
+        },
+        {
+          type: 'row',
+          fields: [
             { name: 'minOrder', label: 'Minimum Alım', type: 'number', admin: { width: '50%' } },
             {
               name: 'orderUnit',
