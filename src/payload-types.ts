@@ -142,7 +142,25 @@ export interface Product {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Katalogda basılı kod (örn. MHK-9). Ürün kartında bu gösterilir. Kodsuz ürünlerde boş bırakın.
+   */
+  catalogCode?: string | null;
+  /**
+   * Katalogdaki birim fiyat.
+   */
+  price?: number | null;
+  currency?: ('USD' | 'TRY') | null;
+  /**
+   * Katalogdaki altın rozette görünen boyut yazısı.
+   */
+  sizeLabel?: string | null;
+  /**
+   * Katalogda görselin altında listelenen renk seçenekleri.
+   */
+  variants?: string | null;
   capacityMl?: number | null;
+  weightG?: number | null;
   height?: number | null;
   width?: number | null;
   neckSize?: string | null;
@@ -248,6 +266,10 @@ export interface Media {
 export interface Category {
   id: number;
   name: string;
+  /**
+   * Katalogdaki gibi başlığın altında ikinci satır olarak gösterilir. Örn: PERFUME BOTTLES
+   */
+  nameEn?: string | null;
   /**
    * Boş bırakılırsa kategori adından otomatik oluşturulur. Örn: parfum-siseleri
    */
@@ -382,7 +404,13 @@ export interface ProductsSelect<T extends boolean = true> {
         image?: T;
         id?: T;
       };
+  catalogCode?: T;
+  price?: T;
+  currency?: T;
+  sizeLabel?: T;
+  variants?: T;
   capacityMl?: T;
+  weightG?: T;
   height?: T;
   width?: T;
   neckSize?: T;
@@ -407,6 +435,7 @@ export interface ProductsSelect<T extends boolean = true> {
  */
 export interface CategoriesSelect<T extends boolean = true> {
   name?: T;
+  nameEn?: T;
   slug?: T;
   description?: T;
   image?: T;

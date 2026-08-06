@@ -81,6 +81,34 @@ export const getProducts = cache(async (q: ProductQuery = {}) => {
   })
 })
 
+/**
+ * Bir kategorinin tüm ürünlerini katalogdaki gibi boyut rozetine göre gruplar.
+ * Katalogda her boyut ("50 ML", "50 ML VALFLİ" …) kendi altın rozetiyle
+ * ayrı bir bölüm olarak basılır; site de aynı yapıyı izler.
+ */
+export const getCategoryGroups = cache(
+  async (categorySlug: string): Promise<Array<{ size: string | null; products: Product[] }>> => {
+    const payload = await getPayloadClient()
+    const { docs } = await payload.find({
+      collection: 'products',
+      where: { and: [{ active: { equals: true } }, { 'category.slug': { equals: categorySlug } }] },
+      sort: 'sortOrder',
+      depth: 2,
+      limit: 1000,
+      pagination: false,
+    })
+
+    const groups: Array<{ size: string | null; products: Product[] }> = []
+    for (const product of docs) {
+      const size = product.sizeLabel ?? null
+      const last = groups[groups.length - 1]
+      if (last && last.size === size) last.products.push(product)
+      else groups.push({ size, products: [product] })
+    }
+    return groups
+  },
+)
+
 export const getFeaturedProducts = cache(async (limit = 8): Promise<Product[]> => {
   const payload = await getPayloadClient()
   const { docs } = await payload.find({

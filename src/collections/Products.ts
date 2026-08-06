@@ -56,6 +56,45 @@ export const Products: CollectionConfig = {
       ],
     },
     {
+      name: 'catalogCode',
+      label: 'Katalog Kodu (görünen)',
+      type: 'text',
+      admin: {
+        position: 'sidebar',
+        description:
+          'Katalogda basılı kod (örn. MHK-9). Ürün kartında bu gösterilir. Kodsuz ürünlerde boş bırakın.',
+      },
+    },
+    {
+      type: 'collapsible',
+      label: 'Fiyat',
+      admin: { initCollapsed: false },
+      fields: [
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'price',
+              label: 'Fiyat',
+              type: 'number',
+              admin: { width: '50%', step: 0.01, description: 'Katalogdaki birim fiyat.' },
+            },
+            {
+              name: 'currency',
+              label: 'Para Birimi',
+              type: 'select',
+              defaultValue: 'USD',
+              options: [
+                { label: 'ABD Doları ($)', value: 'USD' },
+                { label: 'Türk Lirası (₺)', value: 'TRY' },
+              ],
+              admin: { width: '50%' },
+            },
+          ],
+        },
+      ],
+    },
+    {
       type: 'collapsible',
       label: 'Teknik Özellikler',
       admin: { initCollapsed: false },
@@ -63,9 +102,35 @@ export const Products: CollectionConfig = {
         {
           type: 'row',
           fields: [
-            { name: 'capacityMl', label: 'Hacim (ml)', type: 'number', admin: { width: '33%' } },
-            { name: 'height', label: 'Yükseklik (mm)', type: 'number', admin: { width: '33%' } },
-            { name: 'width', label: 'Genişlik / Çap (mm)', type: 'number', admin: { width: '34%' } },
+            {
+              name: 'sizeLabel',
+              label: 'Katalog Boyut Etiketi',
+              type: 'text',
+              admin: {
+                width: '50%',
+                placeholder: 'örn. 50 ML Valfli',
+                description: 'Katalogdaki altın rozette görünen boyut yazısı.',
+              },
+            },
+            {
+              name: 'variants',
+              label: 'Renk / Kaplama Seçenekleri',
+              type: 'text',
+              admin: {
+                width: '50%',
+                placeholder: 'örn. SILVER GOLD',
+                description: 'Katalogda görselin altında listelenen renk seçenekleri.',
+              },
+            },
+          ],
+        },
+        {
+          type: 'row',
+          fields: [
+            { name: 'capacityMl', label: 'Hacim (ml)', type: 'number', admin: { width: '25%' } },
+            { name: 'weightG', label: 'Ağırlık (g)', type: 'number', admin: { width: '25%' } },
+            { name: 'height', label: 'Yükseklik (mm)', type: 'number', admin: { width: '25%' } },
+            { name: 'width', label: 'Genişlik / Çap (mm)', type: 'number', admin: { width: '25%' } },
           ],
         },
         {

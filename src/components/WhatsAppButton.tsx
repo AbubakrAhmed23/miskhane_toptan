@@ -17,10 +17,9 @@ export function WhatsAppButton({ number, message, children, className, iconClass
       href={waLink(number, message)}
       target="_blank"
       rel="noopener noreferrer"
-      className={
-        className ??
-        'inline-flex items-center justify-center gap-2 rounded-full bg-whatsapp px-6 py-3 font-medium text-white shadow-soft transition hover:bg-whatsapp-dark'
-      }
+      /* Varsayılan: markanın altın CTA'sı. Aynı eylem (WhatsApp) sitenin her
+         yerinde aynı renkte görünsün diye WhatsApp yeşili yerine --color-gold. */
+      className={className ?? 'btn btn-gold shadow-soft'}
     >
       <WhatsAppIcon className={iconClassName ?? 'h-5 w-5'} />
       {children ?? 'WhatsApp ile İletişime Geç'}

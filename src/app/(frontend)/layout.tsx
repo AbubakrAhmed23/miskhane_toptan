@@ -1,18 +1,27 @@
 import type { Metadata } from 'next'
-import { JetBrains_Mono, Mada } from 'next/font/google'
+import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google'
 import React from 'react'
 
+import { AnnouncementBar } from '@/components/AnnouncementBar'
 import { SiteFooter } from '@/components/SiteFooter'
 import { SiteHeader } from '@/components/SiteHeader'
 import { WhatsAppFloat } from '@/components/WhatsAppFloat'
 import { getCategories, getSettings } from '@/lib/queries'
 import './globals.css'
 
-// Mada — ana yazı tipi (Erbatur aynası)
-const mada = Mada({
+// Cormorant Garamond — başlıklar (display serif)
+const cormorant = Cormorant_Garamond({
   subsets: ['latin', 'latin-ext'],
-  weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-mada',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-cormorant',
+  display: 'swap',
+})
+
+// Inter — gövde metni, menü, kategoriler ve arayüz
+const inter = Inter({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-inter',
   display: 'swap',
 })
 
@@ -58,8 +67,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const [settings, categories] = await Promise.all([getSettings(), getCategories()])
 
   return (
-    <html lang="tr" className={`${mada.variable} ${jbmono.variable}`}>
+    <html lang="tr" className={`${inter.variable} ${cormorant.variable} ${jbmono.variable}`}>
       <body className="flex min-h-screen flex-col">
+        <AnnouncementBar />
         <SiteHeader settings={settings} />
         <main className="flex-1">{children}</main>
         <SiteFooter settings={settings} categories={categories} />

@@ -18,6 +18,10 @@ const nextConfig: NextConfig = {
       {
         pathname: '/hero/**',
       },
+      {
+        // Katalogdan çıkarılan bölüm fotoğrafları ve köşe süslemeleri
+        pathname: '/catalog/**',
+      },
     ],
   },
   webpack: (webpackConfig) => {

@@ -74,3 +74,104 @@ export function CheckIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+
+/* ---------------------------------------------------------------
+   İnce çizgili ikon seti — tümü 1.3 stroke, 24'lük ızgara.
+   Bölüm başlıklarında ikon + kısa etiket olarak kullanılır.
+   --------------------------------------------------------------- */
+const line = {
+  viewBox: '0 0 24 24',
+  fill: 'none',
+  stroke: 'currentColor',
+  strokeWidth: 1.3,
+  strokeLinecap: 'round',
+  strokeLinejoin: 'round',
+  'aria-hidden': true,
+} as const
+
+/** Toptan / koli teslimat */
+export function TruckIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...line} {...props}>
+      <path d="M2 7.5A1.5 1.5 0 0 1 3.5 6h9A1.5 1.5 0 0 1 14 7.5V16H2V7.5Z" />
+      <path d="M14 10h3.6a2 2 0 0 1 1.7.95L21.5 14v2H14v-6Z" />
+      <circle cx="6" cy="18" r="1.8" />
+      <circle cx="17.5" cy="18" r="1.8" />
+    </svg>
+  )
+}
+
+/** Kalite güvencesi */
+export function ShieldIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...line} {...props}>
+      <path d="M12 3l7 2.6v5.2c0 4.4-2.9 8.4-7 10.2-4.1-1.8-7-5.8-7-10.2V5.6L12 3Z" />
+      <path d="m9 12 2.2 2.2L15.4 10" />
+    </svg>
+  )
+}
+
+/** Numune / paket */
+export function BoxIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...line} {...props}>
+      <path d="M12 3 3.5 7.2v9.6L12 21l8.5-4.2V7.2L12 3Z" />
+      <path d="M3.5 7.2 12 11.5l8.5-4.3M12 11.5V21" />
+    </svg>
+  )
+}
+
+/** Destek / iletişim */
+export function SupportIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...line} {...props}>
+      <path d="M4 13v-1a8 8 0 1 1 16 0v1" />
+      <path d="M4 13h2.2a1 1 0 0 1 1 1v3.4a1 1 0 0 1-1 1H5.4A1.4 1.4 0 0 1 4 17V13ZM20 13h-2.2a1 1 0 0 0-1 1v3.4a1 1 0 0 0 1 1h.8A1.4 1.4 0 0 0 20 17V13Z" />
+    </svg>
+  )
+}
+
+/** Özel üretim / zanaat */
+export function SparkleIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...line} {...props}>
+      <path d="M12 3.5 13.7 9 19 10.8 13.7 12.6 12 18l-1.7-5.4L5 10.8 10.3 9 12 3.5Z" />
+      <path d="M18.5 16.5 19.2 18.5 21 19.2 19.2 19.9 18.5 22 17.8 19.9 16 19.2 17.8 18.5 18.5 16.5Z" />
+    </svg>
+  )
+}
+
+/** Şişe / ürün çeşidi */
+export function BottleIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...line} {...props}>
+      <path d="M10 2.8h4v2.4c0 1 .4 1.5 1.1 2.2.9.9 1.4 2 1.4 3.4v8.4a2.4 2.4 0 0 1-2.4 2.4H9.9a2.4 2.4 0 0 1-2.4-2.4v-8.4c0-1.4.5-2.5 1.4-3.4.7-.7 1.1-1.2 1.1-2.2V2.8Z" />
+      <path d="M7.5 12.5h9" />
+    </svg>
+  )
+}
+
+/** Katalog / liste */
+export function CatalogIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...line} {...props}>
+      <path d="M4 4.5h6.5a2 2 0 0 1 2 2V20a1.8 1.8 0 0 0-1.8-1.6H4V4.5ZM20 4.5h-6.5a2 2 0 0 0-2 2V20a1.8 1.8 0 0 1 1.8-1.6H20V4.5Z" />
+    </svg>
+  )
+}
+
+export function ChevronLeftIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...line} strokeWidth={1.6} {...props}>
+      <path d="m14.5 5-7 7 7 7" />
+    </svg>
+  )
+}
+
+export function ChevronRightIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...line} strokeWidth={1.6} {...props}>
+      <path d="m9.5 5 7 7-7 7" />
+    </svg>
+  )
+}

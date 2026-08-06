@@ -5,7 +5,8 @@ import { mediaAlt, mediaUrl, type SizeKey } from '@/lib/media'
 
 interface Props {
   media?: number | Media | null
-  size?: SizeKey
+  /** 'original' → hiç küçültülmemiş kaynak dosya (ürün detayı için). */
+  size?: SizeKey | 'original'
   alt?: string
   fill?: boolean
   width?: number
@@ -26,12 +27,12 @@ export function MediaImage({
   sizes,
   priority,
 }: Props) {
-  const url = mediaUrl(media, size)
+  const url = mediaUrl(media, size === 'original' ? undefined : size)
   const label = alt || mediaAlt(media, 'Miskhane ürün görseli')
 
   if (!url) {
     return (
-      <div className={`flex items-center justify-center bg-soft text-muted ${className ?? ''}`}>
+      <div className={`flex items-center justify-center bg-cream text-muted ${className ?? ''}`}>
         <span className="font-serif text-sm">Görsel yok</span>
       </div>
     )

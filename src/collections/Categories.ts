@@ -22,6 +22,15 @@ export const Categories: CollectionConfig = {
       required: true,
     },
     {
+      name: 'nameEn',
+      label: 'İngilizce Adı',
+      type: 'text',
+      admin: {
+        description:
+          'Katalogdaki gibi başlığın altında ikinci satır olarak gösterilir. Örn: PERFUME BOTTLES',
+      },
+    },
+    {
       name: 'slug',
       label: 'URL (slug)',
       type: 'text',

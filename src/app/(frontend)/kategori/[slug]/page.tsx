@@ -1,11 +1,14 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import { CatalogBadge } from '@/components/CatalogBadge'
 import { ProductCard } from '@/components/ProductCard'
 import { WhatsAppButton } from '@/components/WhatsAppButton'
 import { ArrowIcon } from '@/components/icons'
-import { getCategories, getCategoryBySlug, getProducts, getSettings } from '@/lib/queries'
+import { getCategories, getCategoryBySlug, getCategoryGroups, getSettings } from '@/lib/queries'
+import { mediaUrl } from '@/lib/media'
 
 export async function generateStaticParams() {
   const categories = await getCategories()
@@ -26,47 +29,97 @@ export async function generateMetadata({
   }
 }
 
+// Katalogdaki bölüm ayracı fotoğrafları (yenikatalog1.pdf'ten alındı).
+const HERO: Record<string, string> = {
+  'parfum-siseleri': '/catalog/cat-parfum-siseleri.webp',
+  'esans-siseleri': '/catalog/cat-esans-siseleri.webp',
+  kapaklar: '/catalog/cat-kapaklar.webp',
+  kolonyalar: '/catalog/cat-kolonyalar.webp',
+  'sprey-oda-kokulari': '/catalog/cat-oda-kokulari.webp',
+  'bambu-cubuklu-oda-kokulari': '/catalog/cat-oda-kokulari.webp',
+}
+
 export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const category = await getCategoryBySlug(slug)
   if (!category) notFound()
 
-  const [settings, result] = await Promise.all([
-    getSettings(),
-    getProducts({ categorySlug: slug, limit: 48 }),
-  ])
-  const products = result.docs
+  const [settings, groups] = await Promise.all([getSettings(), getCategoryGroups(slug)])
+  const total = groups.reduce((n, g) => n + g.products.length, 0)
+  const hero = HERO[slug] ?? mediaUrl(category.image, 'large')
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-5 py-12 sm:px-8">
-      <nav className="mb-6 flex items-center gap-2 text-sm text-muted">
-        <Link href="/" className="hover:text-gold">
-          Ana Sayfa
-        </Link>
-        <span className="text-line">/</span>
-        <Link href="/urunler" className="hover:text-gold">
-          Ürünler
-        </Link>
-        <span className="text-line">/</span>
-        <span className="text-ink">{category.name}</span>
-      </nav>
+    <div>
+      {/* ---- Bölüm ayracı: katalogdaki tam sayfa tanıtım ---- */}
+      <section className="bg-cream">
+        <div className="mx-auto w-full max-w-6xl px-5 pt-10 sm:px-8">
+          <nav className="mb-8 flex items-center gap-2 text-xs tracking-wide text-muted">
+            <Link href="/" className="hover:text-accent-text">
+              Ana Sayfa
+            </Link>
+            <span className="text-muted">/</span>
+            <Link href="/urunler" className="hover:text-accent-text">
+              Katalog
+            </Link>
+            <span className="text-muted">/</span>
+            <span className="text-navy">{category.name}</span>
+          </nav>
 
-      <header className="mb-8">
-        <h1 className="font-serif text-3xl font-semibold text-ink sm:text-4xl">{category.name}</h1>
-        {category.description && (
-          <p className="mt-2 max-w-2xl text-muted">{category.description}</p>
-        )}
-        <p className="mt-1 text-sm text-muted">{result.totalDocs} ürün</p>
-      </header>
+          <header className="text-center">
+            <h1 className="section-title text-4xl text-navy sm:text-5xl md:text-6xl">
+              {category.name.toLocaleUpperCase('tr-TR')}
+            </h1>
+            {category.nameEn ? (
+              <p className="section-subtitle mt-3">{category.nameEn}</p>
+            ) : null}
+            {category.description ? (
+              <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-muted">
+                {category.description}
+              </p>
+            ) : null}
+            <p className="mt-4 text-xs uppercase tracking-[0.24em] text-accent-text">
+              {total} ürün
+            </p>
+          </header>
 
-      {products.length > 0 ? (
-        <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+          {hero ? (
+            <div className="relative mt-10 aspect-[16/9] w-full overflow-hidden rounded-2xl shadow-card sm:aspect-[2/1]">
+              <Image
+                src={hero}
+                alt={`${category.name} koleksiyonu`}
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 1152px"
+              />
+            </div>
+          ) : null}
+        </div>
+        <div className="section-pb" />
+      </section>
+
+      {/* ---- Ürünler: katalogdaki gibi boyut rozetiyle ayrılmış bölümler ---- */}
+      {total > 0 ? (
+        <div className="bg-white">
+          {groups.map((group, i) => (
+            <section key={`${group.size ?? 'genel'}-${i}`}>
+              <div
+                className={`mx-auto w-full max-w-6xl px-5 pb-12 sm:px-8 ${i === 0 ? 'pt-12 sm:pt-16' : 'pt-10'}`}
+              >
+                <div className="flex justify-center">
+                  <CatalogBadge category={category.name} size={group.size} />
+                </div>
+                <div className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
+                  {group.products.map((product) => (
+                    <ProductCard key={product.id} product={product} />
+                  ))}
+                </div>
+              </div>
+            </section>
           ))}
         </div>
       ) : (
-        <div className="flex flex-col items-center gap-5 rounded-2xl border border-line bg-white py-16 text-center">
+        <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-5 px-5 py-20 text-center sm:px-8">
           <p className="max-w-md text-muted">
             Bu kategoride henüz ürün eklenmemiş. WhatsApp üzerinden bize ulaşabilirsiniz.
           </p>
@@ -77,13 +130,14 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
         </div>
       )}
 
-      <div className="mt-10">
+
+      <div className="mx-auto w-full max-w-6xl px-5 py-10 sm:px-8">
         <Link
           href="/urunler"
-          className="inline-flex items-center gap-1 text-sm font-medium text-gold hover:gap-2"
+          className="btn-link"
         >
           <ArrowIcon className="h-4 w-4 rotate-180" />
-          Tüm ürünlere dön
+          Katalog dizinine dön
         </Link>
       </div>
     </div>

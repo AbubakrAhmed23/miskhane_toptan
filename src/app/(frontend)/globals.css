@@ -1,33 +1,70 @@
-/* Hallmark · macrostructure: Catalogue Index · tone: luxury · anchor hue: gold (~40°) */
-/* Hallmark · pre-emit critique: P5 H4 E4 S4 R4 V4 */
-/* Marka paleti/font sabit (Erbatur aynası, kullanıcı isteği): beyaz + petrol + altın · Mada + JetBrains Mono */
+/* Miskhane Toptan — tasarım sistemi.
+   Tüm renkler @theme içindeki 4 tokenden (navy · cream · amber · clay)
+   ve nötr beyazdan türer; başka hiçbir yerde sabit renk kodu yoktur.
+   Tipografi: Cormorant Garamond (başlık) + Inter (arayüz/veri) */
 @import 'tailwindcss';
 
 @theme {
-  /* Erbatur aynası: beyaz + petrol/teal + altın */
-  --color-soft: #f4f7f8; /* açık bölüm zemini */
-  --color-petrol: #003a4b; /* ana marka koyu (teal) */
-  --color-petrol-deep: #02171d; /* en koyu (footer/CTA) */
-  --color-ink: #202a2e; /* gövde metni */
-  --color-muted: #63727a; /* ikincil metin */
-  --color-gold: #c38a3b; /* vurgu (altın/bronz) */
-  --color-gold-deep: #a06f2b;
-  --color-blue: #5790a0; /* ikincil vurgu */
-  --color-line: #e4e9ea; /* çizgiler/kenarlar */
-  --color-cream: #ffffff; /* koyu bölümlerde açık metin/öğe */
-  --color-paper: #ffffff; /* ürün görseli zemini */
-  --color-whatsapp: #25d366;
-  --color-whatsapp-dark: #1da851;
+  /* ================================================================
+     TEK KAYNAK PALET — sitedeki TÜM renkler bu 4 tokenden türer.
+     Başka hiçbir dosyada sabit renk kodu (hex) bulunmaz.
+     ================================================================ */
+  --color-navy: #0a2947; /* ana koyu: başlık, koyu bölümler, aktif nav */
+  --color-cream: #f5ede0; /* temel açık zemin: sayfa, hero, section */
+  --color-amber: #c08a34; /* TEK vurgu: CTA dolgusu, rozet, ikon */
+  --color-clay: #a9714f; /* YALNIZCA ayraç/border/pasif — dolgu ve metin DEĞİL */
 
-  /* Yazı tipleri: Mada (ana) + JetBrains Mono (kod/veri) */
-  --font-sans: var(--font-mada), system-ui, -apple-system, sans-serif;
-  --font-serif: var(--font-mada), system-ui, -apple-system, sans-serif;
+  /* Nötr yüzey — kart/içerik zemini */
+  --color-white: #ffffff;
+
+  /* --------- Türetilmiş roller (yeni renk DEĞİL, yukarıdakilerin karışımı) --------- */
+  /* Koyu zemin üzerinde ikincil metin */
+  --color-on-dark-muted: color-mix(in srgb, var(--color-cream) 72%, var(--color-navy));
+  /* Açık zeminde ikincil metin — clay metin olarak KULLANILMAZ, navy seyreltilir */
+  --color-text-muted: color-mix(in srgb, var(--color-navy) 68%, var(--color-cream));
+
+  /* --------- Geriye dönük takma adlar --------- */
+  --color-ink: var(--color-navy);
+  --color-text: var(--color-navy);
+  --color-accent: var(--color-amber);
+  --color-gold: var(--color-amber);
+  --color-gold-deep: var(--color-accent-text);
+  --color-gold-light: var(--color-amber);
+  --color-canvas: var(--color-cream);
+  --color-base: var(--color-cream);
+  --color-soft: var(--color-cream);
+  --color-cream-alt: var(--color-cream);
+  --color-surface: var(--color-white);
+  --color-paper: var(--color-white);
+  --color-line: var(--color-clay);
+  --color-spec: var(--color-clay);
+  --color-muted: var(--color-text-muted);
+
+  /* Logo işaretindeki altın — BİLİNÇLİ marka istisnası, palet dışıdır ve
+     migrasyona dahil DEĞİLDİR. logo-mark.png'nin kendi tonuyla eşleşir. */
+  --color-logo-accent: #c6a45c;
+
+  /* Amber açık bir renktir: krem üzerinde yalnızca 2.61:1 verir, yani metin
+     olarak KULLANILAMAZ. Açık zemindeki metinler (eyebrow, fiyat, link) için
+     navy ile koyulaştırılmış varyant → krem 4.97:1 / beyaz 5.78:1 (AA ✓). */
+  --color-accent-text: color-mix(in srgb, var(--color-amber) 60%, var(--color-navy));
+
+  --color-whatsapp: var(--color-amber);
+  --color-whatsapp-dark: var(--color-navy);
+
+  /* Yazı tipleri: Cormorant Garamond (başlık) + Inter (arayüz/gövde) + JetBrains Mono (kod/veri) */
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-cormorant), Georgia, 'Times New Roman', serif;
   --font-mono: var(--font-jbmono), ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
-  --shadow-soft: 0 1px 2px rgba(0, 58, 75, 0.05), 0 12px 30px -14px rgba(0, 58, 75, 0.18);
-  --shadow-card: 0 1px 3px rgba(0, 58, 75, 0.07), 0 16px 40px -24px rgba(0, 58, 75, 0.25);
+  --shadow-soft: 0 1px 2px color-mix(in srgb, var(--color-navy) 6%, transparent), 0 12px 30px -14px color-mix(in srgb, var(--color-navy) 16%, transparent);
+  --shadow-card: 0 1px 3px color-mix(in srgb, var(--color-navy) 8%, transparent), 0 16px 40px -24px color-mix(in srgb, var(--color-navy) 22%, transparent);
 
+  /* ---- HAREKET SİSTEMİ: 3 standart süre + TEK easing ---- */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 150ms; /* renk/hover geçişleri */
+  --dur-base: 300ms; /* kart kalkması, ölçek */
+  --dur-slow: 600ms; /* scroll'da beliren bölümler */
 }
 
 :root {
@@ -46,8 +83,8 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background: #ffffff;
-  color: var(--color-ink);
+  background: var(--color-cream);
+  color: var(--color-navy);
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.6;
@@ -61,53 +98,337 @@ img {
 }
 
 ::selection {
-  background: var(--color-gold);
-  color: #ffffff;
+  background: var(--color-amber);
+  color: var(--color-white);
 }
 
-/* Altın vurgu metni (başlık aksanı) */
+/* Altın vurgu metni (katalogdaki altın serif başlıklar) */
 .gold-text {
-  background: linear-gradient(180deg, #d9a441 0%, #c38a3b 55%, #a06f2b 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--color-accent-text);
 }
 
 /* İnce altın çizgi */
 .gold-rule {
   height: 2px;
-  background: linear-gradient(90deg, var(--color-gold), transparent);
+  background: linear-gradient(90deg, var(--color-amber), transparent);
 }
 
-/* Ürün kodu / teknik veri — mono tipografik sistem */
-.code {
-  font-family: var(--font-mono);
-  font-feature-settings: 'tnum' 1;
-  letter-spacing: 0.02em;
-}
+/* ------------------------------------------------------------------
+   KATALOG İMZA ÖĞELERİ
+   ------------------------------------------------------------------ */
 
-/* Mono eyebrow (bölüm etiketi) */
-.eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
+/* Sayfa üstündeki altın rozet: küçük kategori satırı + büyük boyut satırı.
+   Katalogda her ürün sayfasının tepesinde ortalanmış olarak durur. */
+.cat-badge {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  padding: 0.45rem 1.6rem 0.55rem;
+  background: var(--color-amber);
+  color: var(--color-navy);
+  border-radius: 3px;
+  text-align: center;
+  box-shadow: none;
+}
+.cat-badge__kicker {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  opacity: 0.95;
+}
+.cat-badge__size {
+  font-size: 1.05rem;
   font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1.15;
+}
+
+/* Katalogun alt kenarındaki altın bant */
+.gold-band {
+  height: 1px;
+  background: var(--color-clay);
+}
+
+/* Ayraç sayfalarındaki ince altın çerçeve */
+.gold-frame {
+  box-shadow: inset 0 0 0 1px var(--color-amber);
+}
+
+/* Ürün kodu — katalogda görselin üstünde, seyrek harf aralıklı serif */
+.product-code {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--color-navy);
+}
+
+/* Teknik özellik şeridi — katalogdaki gri tablo */
+.spec-strip {
+  /* Clay blok olarak kullanılmaz; çok hafif tint + ince çerçeve */
+  background: color-mix(in srgb, var(--color-clay) 16%, var(--color-white));
+  font-feature-settings: 'tnum' 1;
+}
+.spec-strip__label {
+  font-size: 0.5rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  line-height: 1.1;
+}
+.spec-strip__value {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--color-navy);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+/* Fiyat sütunu diğerlerinden geniş — "10,00 ₺" tek satırda kalsın */
+.spec-strip__col--price {
+  flex: 1.5 1 0%;
+}
+/* Detay sayfasındaki geniş şeritte katalogdaki ferah ölçüler kullanılır */
+.spec-strip--lg .spec-strip__label {
+  font-size: 0.58rem;
+}
+.spec-strip--lg .spec-strip__value {
+  font-size: 1rem;
+}
+.spec-strip__price {
+  color: var(--color-accent-text);
+  font-weight: 500;
+}
+
+/* Bölüm başlığı — katalogdaki iki dilli ayraç tipografisi */
+.section-title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  line-height: 1.05;
+}
+.section-subtitle {
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* Serif eyebrow (bölüm etiketi) */
+.eyebrow {
+  font-size: 0.68rem;
+  font-weight: 600;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--color-gold-deep);
+  color: var(--color-accent-text);
+}
+/* Koyu zeminlerde küçük punto için krem kullanılır (11.8:1) */
+.on-dark .eyebrow,
+.eyebrow--on-dark {
+  color: var(--color-cream);
+}
+
+/* Ürün kodu / teknik veri — tablo rakamları hizalı */
+.code {
+  font-feature-settings: 'tnum' 1;
+  letter-spacing: 0.04em;
+}
+
+/* Fiyat — her yerde altın vurgu rengiyle (rozet ve butonlarla aynı kaynak) */
+.price {
+  font-feature-settings: 'tnum' 1;
+  letter-spacing: 0.04em;
+  color: var(--color-accent-text);
+  font-weight: 500;
+}
+
+/* ------------------------------------------------------------------
+   DİKEY RİTİM — bölümler arası tek bir boşluk ölçeği
+   mobil 48px · tablet 80px · masaüstü 96px
+   Tesadüfi boşluk yerine her bölüm bu sınıfı kullanır.
+   ------------------------------------------------------------------ */
+.section-y {
+  padding-block: 3rem;
+}
+@media (min-width: 640px) {
+  .section-y {
+    padding-block: 5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .section-y {
+    padding-block: 6rem;
+  }
+}
+/* Yalnızca üst ya da yalnızca alt boşluk gerektiğinde */
+.section-pt {
+  padding-top: 3rem;
+}
+.section-pb {
+  padding-bottom: 3rem;
+}
+@media (min-width: 640px) {
+  .section-pt {
+    padding-top: 5rem;
+  }
+  .section-pb {
+    padding-bottom: 5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .section-pt {
+    padding-top: 6rem;
+  }
+  .section-pb {
+    padding-bottom: 6rem;
+  }
+}
+
+/* ------------------------------------------------------------------
+   BİLEŞEN SİSTEMİ — hap butonlar, yumuşak kartlar, ikon öğeleri
+   ------------------------------------------------------------------ */
+
+/* Tüm butonların ortak tabanı: hap şekilli, ferah iç boşluk */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.85rem 1.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  transition:
+    transform 0.25s var(--ease-out),
+    box-shadow 0.25s var(--ease-out),
+    background 0.25s var(--ease-out),
+    color 0.25s var(--ease-out);
+}
+.btn:hover {
+  transform: translateY(-1px);
+}
+.btn-sm {
+  padding: 0.6rem 1.25rem;
+  font-size: 0.8rem;
+}
+
+/* Üçüncül aksiyon: ok ikonlu metin linki */
+.btn-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-accent-text);
+  transition: gap 0.25s var(--ease-out);
+}
+.btn-link:hover {
+  gap: 0.7rem;
+}
+
+/* Kart: yumuşak gölge, yuvarlatılmış köşe, hover'da hafif yükselme */
+.card {
+  background: var(--color-white);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-soft);
+  transition:
+    transform 0.3s var(--ease-out),
+    box-shadow 0.3s var(--ease-out);
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
+}
+
+/* Ürün görselinin köşesindeki küçük hap rozet */
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  background: var(--color-amber);
+  color: var(--color-navy);
+  padding: 0.25rem 0.7rem;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+/* Koyu varyant: .pill-badge'in navy metnini DEVRALMAZ — kendi açık metnini
+   tanımlar. (Amber dolgu için navy metne geçilince bu varyant görünmez olmuştu.) */
+.pill-badge--ink {
+  background: var(--color-navy);
+  color: var(--color-cream);
+}
+
+/* İnce çizgili ikon + altında kısa etiket */
+.icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  text-align: center;
+}
+.icon-item__label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.35;
+}
+
+/* Yatay kaydırmalı carousel — kaydırma çubuğu gizli, öğeler hizalı durur */
+.rail {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.rail::-webkit-scrollbar {
+  display: none;
+}
+.rail > * {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rail {
+    scroll-behavior: auto;
+  }
+  .btn:hover,
+  .card:hover {
+    transform: none;
+  }
 }
 
 /* Altın parıltılı birincil buton */
+/* Dolu altın buton — rozet ve çerçeveli butonla AYNI kaynak rengi kullanır.
+   (Eskiden gradient'ti; bu yüzden diğer altın öğelerden farklı görünüyordu.) */
 .btn-gold {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #d3a04a, #c38a3b 55%, #a06f2b);
-  color: #ffffff;
+  background: var(--color-amber);
+  /* Amber orta-açık: üzerinde navy 4.87:1 (AA ✓), beyaz 3.03:1 (✗) */
+  color: var(--color-navy);
+}
+.btn-gold:hover {
+  background: color-mix(in srgb, var(--color-amber) 85%, var(--color-navy));
 }
 .btn-gold::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%);
+  background: linear-gradient(120deg, transparent 30%, color-mix(in srgb, var(--color-white) 45%, transparent) 50%, transparent 70%);
   transform: translateX(-120%);
   transition: transform 0.8s var(--ease-out);
 }
@@ -115,14 +436,28 @@ img {
   transform: translateX(120%);
 }
 
-/* Petrol (teal) buton */
-.btn-petrol {
-  background: var(--color-petrol);
-  color: #ffffff;
+/* Koyu mürekkep buton (ikincil eylem) */
+.btn-ink {
+  background: var(--color-navy);
+  color: var(--color-white);
   transition: background 0.25s var(--ease-out);
 }
-.btn-petrol:hover {
-  background: var(--color-petrol-deep);
+.btn-ink:hover {
+  background: color-mix(in srgb, var(--color-navy) 85%, var(--color-cream));
+}
+
+/* Çerçeveli ikincil buton */
+.btn-outline {
+  border: 1px solid var(--color-amber);
+  color: var(--color-accent-text);
+  background: transparent;
+  transition:
+    background 0.25s var(--ease-out),
+    color 0.25s var(--ease-out);
+}
+.btn-outline:hover {
+  background: var(--color-amber);
+  color: var(--color-navy);
 }
 
 /* Kayan ürün şeridi (marquee) */
@@ -266,14 +601,14 @@ img {
   font-size: 1.6rem;
   font-weight: 700;
   margin-top: 1.5rem;
-  color: var(--color-petrol);
+  color: var(--color-navy);
 }
 .richtext h3 {
   font-family: var(--font-serif);
   font-size: 1.3rem;
   font-weight: 700;
   margin-top: 1.25rem;
-  color: var(--color-petrol);
+  color: var(--color-navy);
 }
 .richtext ul {
   list-style: disc;
@@ -284,6 +619,144 @@ img {
   padding-left: 1.25rem;
 }
 .richtext a {
-  color: var(--color-gold-deep);
+  color: var(--color-amber);
   text-decoration: underline;
+}
+
+
+/* ==================================================================
+   HAREKET KATMANI
+   Yalnızca transform ve opacity animasyonlanır → CLS oluşmaz.
+   Tüm süreler --dur-* tokenlarından, tek easing (--ease-out).
+   ================================================================== */
+
+/* --- Scroll'da beliren bölümler (IntersectionObserver, once) --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- Kart: hover'da kalkma + gölge; dokunmatikte :active karşılığı --- */
+.card {
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+.card:hover,
+.card:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
+}
+.card:active {
+  transform: translateY(-2px);
+}
+/* Görsel kart içinde büyür, kap overflow:hidden ile sınırlar */
+.card img {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.card:hover img,
+.card:active img {
+  transform: scale(1.04);
+}
+
+/* --- Butonlar: hover'da ölçek, tıklamada basılma --- */
+.btn {
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out),
+    background var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+.btn:hover {
+  transform: scale(1.02);
+}
+.btn:active {
+  transform: scale(0.98);
+}
+
+/* --- "İncele →" linkleri: ok sağa kayar + ince alt çizgi --- */
+.btn-link {
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.btn-link svg {
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.btn-link:hover svg,
+.card:hover .btn-link svg {
+  transform: translateX(3px);
+}
+.btn-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+
+/* --- Hero carousel: aktif karede çok yavaş Ken Burns --- */
+@keyframes ken-burns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+.ken-burns {
+  animation: ken-burns 6s var(--ease-out) forwards;
+}
+
+/* --- WhatsApp: seyrek, kısa nabız (5 sn'de bir) --- */
+@keyframes wa-pulse {
+  0%,
+  86%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-amber) 55%, transparent);
+  }
+  90% {
+    transform: scale(1.06);
+    box-shadow: 0 0 0 10px color-mix(in srgb, var(--color-amber) 0%, transparent);
+  }
+  95% {
+    transform: scale(1);
+  }
+}
+.wa-pulse {
+  animation: wa-pulse 5s var(--ease-out) infinite;
+}
+
+/* --- Hareket azaltma: TÜM animasyonlar kapalı/anlık --- */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .card,
+  .card img,
+  .btn,
+  .btn-link svg {
+    transition: none;
+  }
+  .card:hover,
+  .card:active,
+  .btn:hover,
+  .btn:active {
+    transform: none;
+  }
+  .card:hover img,
+  .card:active img {
+    transform: none;
+  }
+  .ken-burns,
+  .wa-pulse {
+    animation: none;
+  }
 }

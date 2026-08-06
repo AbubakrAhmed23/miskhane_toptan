@@ -21,24 +21,28 @@ export const Media: CollectionConfig = {
     mimeTypes: ['image/*'],
     focalPoint: true,
     adminThumbnail: 'thumbnail',
-    // Yüklenen büyük PNG'ler otomatik olarak web için WebP'ye çevrilip küçültülür.
-    formatOptions: { format: 'webp', options: { quality: 82 } },
+    // ÖNEMLİ: Yüklenen dosya hiçbir şekilde yeniden kodlanmaz veya küçültülmez.
+    // Orijinal PNG birebir saklanır; ürün detay sayfasında bu orijinal gösterilir.
+    // Türetilen boyutlar yalnızca liste/ızgara görünümleri içindir ve
+    // `withoutEnlargement` sayesinde asla büyütme (upscale) yapmaz.
     imageSizes: [
       {
         name: 'thumbnail',
-        width: 400,
-        position: 'centre',
-        formatOptions: { format: 'webp', options: { quality: 80 } },
+        width: 500,
+        withoutEnlargement: true,
+        formatOptions: { format: 'webp', options: { quality: 90 } },
       },
       {
         name: 'card',
-        width: 768,
-        formatOptions: { format: 'webp', options: { quality: 80 } },
+        width: 900,
+        withoutEnlargement: true,
+        formatOptions: { format: 'webp', options: { quality: 92 } },
       },
       {
         name: 'large',
-        width: 1400,
-        formatOptions: { format: 'webp', options: { quality: 82 } },
+        width: 1600,
+        withoutEnlargement: true,
+        formatOptions: { format: 'webp', options: { quality: 95 } },
       },
     ],
   },
