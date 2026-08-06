@@ -6,29 +6,45 @@ import type { Where } from 'payload'
 import type { Category, Product, Setting } from '@/payload-types'
 import { getPayloadClient } from './payload'
 
-export const getSettings = cache(async (): Promise<Setting | null> => {
-  const payload = await getPayloadClient()
+/**
+ * Build sırasında veritabanı erişilemeyebilir (ör. env değişkenleri henüz
+ * tanımlı değilse). Sayfa üretimini çökertmek yerine güvenli varsayılana düşer;
+ * hata build loglarında görünür ama derleme tamamlanır.
+ */
+async function safe<T>(label: string, fn: () => Promise<T>, fallback: T): Promise<T> {
   try {
-    const settings = await payload.findGlobal({ slug: 'settings', depth: 1 })
-    return settings as Setting
-  } catch {
-    return null
+    return await fn()
+  } catch (err) {
+    console.warn(`[queries] ${label} başarısız — varsayılana düşüldü:`, (err as Error).message)
+    return fallback
   }
-})
+}
 
-export const getCategories = cache(async (): Promise<Category[]> => {
-  const payload = await getPayloadClient()
-  const { docs } = await payload.find({
-    collection: 'categories',
-    sort: 'sortOrder',
-    limit: 100,
-    depth: 1,
-  })
-  return docs
-})
+export const getSettings = cache(async (): Promise<Setting | null> =>
+  // getPayloadClient() de fırlatabilir (ör. PAYLOAD_SECRET yoksa) — o yüzden
+  // istemci oluşturma da güvenli sarmalayıcının içinde.
+  safe('getSettings', async () => {
+    const payload = await getPayloadClient()
+    return (await payload.findGlobal({ slug: 'settings', depth: 1 })) as Setting
+  }, null),
+)
+
+export const getCategories = cache(async (): Promise<Category[]> =>
+  safe('getCategories', async () => {
+    const payload = await getPayloadClient()
+    const { docs } = await payload.find({
+      collection: 'categories',
+      sort: 'sortOrder',
+      limit: 100,
+      depth: 1,
+    })
+    return docs
+  }, []),
+)
 
 export const getCategoriesWithCounts = cache(
-  async (): Promise<Array<Category & { productCount: number }>> => {
+  async (): Promise<Array<Category & { productCount: number }>> =>
+   safe('getCategoriesWithCounts', async () => {
     const payload = await getPayloadClient()
     const categories = await getCategories()
     const withCounts = await Promise.all(
@@ -41,19 +57,21 @@ export const getCategoriesWithCounts = cache(
       }),
     )
     return withCounts
-  },
+   }, []),
 )
 
-export const getCategoryBySlug = cache(async (slug: string): Promise<Category | null> => {
-  const payload = await getPayloadClient()
-  const { docs } = await payload.find({
-    collection: 'categories',
-    where: { slug: { equals: slug } },
-    limit: 1,
-    depth: 1,
-  })
-  return docs[0] ?? null
-})
+export const getCategoryBySlug = cache(async (slug: string): Promise<Category | null> =>
+  safe('getCategoryBySlug', async () => {
+    const payload = await getPayloadClient()
+    const { docs } = await payload.find({
+      collection: 'categories',
+      where: { slug: { equals: slug } },
+      limit: 1,
+      depth: 1,
+    })
+    return docs[0] ?? null
+  }, null),
+)
 
 export interface ProductQuery {
   categorySlug?: string
@@ -62,7 +80,10 @@ export interface ProductQuery {
   page?: number
 }
 
-export const getProducts = cache(async (q: ProductQuery = {}) => {
+const EMPTY_PAGE = { docs: [] as Product[], totalDocs: 0, page: 1, totalPages: 0 }
+
+export const getProducts = cache(async (q: ProductQuery = {}) =>
+ safe('getProducts', async () => {
   const payload = await getPayloadClient()
   const and: Where[] = [{ active: { equals: true } }]
   if (q.categorySlug) and.push({ 'category.slug': { equals: q.categorySlug } })
@@ -79,7 +100,8 @@ export const getProducts = cache(async (q: ProductQuery = {}) => {
     limit: q.limit ?? 24,
     page: q.page ?? 1,
   })
-})
+ }, EMPTY_PAGE as never),
+)
 
 /**
  * Bir kategorinin tüm ürünlerini katalogdaki gibi boyut rozetine göre gruplar.
@@ -87,7 +109,8 @@ export const getProducts = cache(async (q: ProductQuery = {}) => {
  * ayrı bir bölüm olarak basılır; site de aynı yapıyı izler.
  */
 export const getCategoryGroups = cache(
-  async (categorySlug: string): Promise<Array<{ size: string | null; products: Product[] }>> => {
+  async (categorySlug: string): Promise<Array<{ size: string | null; products: Product[] }>> =>
+   safe('getCategoryGroups', async () => {
     const payload = await getPayloadClient()
     const { docs } = await payload.find({
       collection: 'products',
@@ -106,10 +129,11 @@ export const getCategoryGroups = cache(
       else groups.push({ size, products: [product] })
     }
     return groups
-  },
+   }, []),
 )
 
-export const getFeaturedProducts = cache(async (limit = 8): Promise<Product[]> => {
+export const getFeaturedProducts = cache(async (limit = 8): Promise<Product[]> =>
+ safe('getFeaturedProducts', async () => {
   const payload = await getPayloadClient()
   const { docs } = await payload.find({
     collection: 'products',
@@ -119,21 +143,25 @@ export const getFeaturedProducts = cache(async (limit = 8): Promise<Product[]> =
     limit,
   })
   return docs
-})
+ }, []),
+)
 
-export const getProductBySlug = cache(async (slug: string): Promise<Product | null> => {
-  const payload = await getPayloadClient()
-  const { docs } = await payload.find({
-    collection: 'products',
-    where: { slug: { equals: slug } },
-    depth: 2,
-    limit: 1,
-  })
-  return docs[0] ?? null
-})
+export const getProductBySlug = cache(async (slug: string): Promise<Product | null> =>
+  safe('getProductBySlug', async () => {
+    const payload = await getPayloadClient()
+    const { docs } = await payload.find({
+      collection: 'products',
+      where: { slug: { equals: slug } },
+      depth: 2,
+      limit: 1,
+    })
+    return docs[0] ?? null
+  }, null),
+)
 
 export const getRelatedProducts = cache(
-  async (categoryId: number, excludeId: number, limit = 4): Promise<Product[]> => {
+  async (categoryId: number, excludeId: number, limit = 4): Promise<Product[]> =>
+   safe('getRelatedProducts', async () => {
     const payload = await getPayloadClient()
     const { docs } = await payload.find({
       collection: 'products',
@@ -149,11 +177,12 @@ export const getRelatedProducts = cache(
       limit,
     })
     return docs
-  },
+   }, []),
 )
 
 // Sitemap için tüm yayında ürün ve kategori slug'ları.
-export const getAllSlugs = cache(async () => {
+export const getAllSlugs = cache(async () =>
+  safe('getAllSlugs', async () => {
   const payload = await getPayloadClient()
   const [products, categories] = await Promise.all([
     payload.find({
@@ -169,4 +198,5 @@ export const getAllSlugs = cache(async () => {
     products: products.docs.map((p) => ({ slug: p.slug, updatedAt: p.updatedAt })),
     categories: categories.docs.map((c) => ({ slug: c.slug, updatedAt: c.updatedAt })),
   }
-})
+  }, { products: [], categories: [] }),
+)

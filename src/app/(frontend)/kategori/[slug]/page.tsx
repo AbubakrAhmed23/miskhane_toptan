@@ -11,9 +11,15 @@ import { getCategories, getCategoryBySlug, getCategoryGroups, getSettings } from
 import { mediaUrl } from '@/lib/media'
 
 export async function generateStaticParams() {
+  // DB erişilemezse boş liste döner; sayfalar istek anında render edilir.
   const categories = await getCategories()
   return categories.filter((c) => c.slug).map((c) => ({ slug: c.slug as string }))
 }
+
+// Kategori sayfaları veriye bağlı: build anında sabitlenmek yerine istek
+// anında (ve ISR ile) üretilir. Böylece build DB'ye bağımlı olmaz.
+export const dynamicParams = true
+export const revalidate = 300
 
 export async function generateMetadata({
   params,
