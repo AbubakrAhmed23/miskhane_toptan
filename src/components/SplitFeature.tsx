@@ -30,7 +30,7 @@ export function SplitFeature() {
     <section className="bg-white">
       <div className="section-y mx-auto grid w-full max-w-6xl gap-6 px-5 sm:px-8 lg:grid-cols-2">
         {/* Sol: koyu kart */}
-        <div className="flex flex-col justify-center rounded-2xl bg-navy p-10 sm:p-12">
+        <div className="flex flex-col justify-center rounded-2xl bg-espresso p-10 sm:p-12">
           <p className="eyebrow eyebrow--on-dark">Neden Miskhane</p>
           <h2 className="section-title mt-4 text-3xl text-white sm:text-4xl">
             Tek tedarikçiden eksiksiz koku ambalajı.
@@ -52,7 +52,7 @@ export function SplitFeature() {
           {COLUMNS.map(({ Icon, title, text }) => (
             <div key={title} className="flex flex-col gap-3">
               <Icon className="h-8 w-8 text-accent-text" />
-              <h3 className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-navy">
+              <h3 className="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-espresso">
                 {title}
               </h3>
               <p className="text-sm leading-relaxed text-muted">{text}</p>

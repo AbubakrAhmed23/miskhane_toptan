@@ -116,7 +116,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               </>
             )}
             <span className="text-muted">/</span>
-            <span className="text-navy">{code ?? product.title}</span>
+            <span className="text-espresso">{code ?? product.title}</span>
           </nav>
 
           {category ? (
@@ -130,7 +130,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
             <div className="flex flex-col">
               {code ? <p className="product-code text-2xl">{code}</p> : null}
-              <h1 className="section-title mt-2 text-3xl text-navy sm:text-4xl">{product.title}</h1>
+              <h1 className="section-title mt-2 text-3xl text-espresso sm:text-4xl">{product.title}</h1>
 
               {price ? (
                 <p className="mt-5 flex items-baseline gap-2">
@@ -149,7 +149,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                       <dt className="text-xs uppercase tracking-[0.14em] text-muted">
                         {row.label}
                       </dt>
-                      <dd className="code text-sm text-navy">{row.value}</dd>
+                      <dd className="code text-sm text-espresso">{row.value}</dd>
                     </div>
                   ))}
                 </dl>
@@ -174,7 +174,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               </div>
 
               {product.description && (
-                <div className="richtext mt-8 text-navy/90">
+                <div className="richtext mt-8 text-espresso/90">
                   <RichText data={product.description} />
                 </div>
               )}
@@ -188,7 +188,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         <section className="section-y bg-white">
           <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
             <div className="flex items-baseline justify-between">
-              <h2 className="section-title text-2xl text-navy sm:text-3xl">Benzer Ürünler</h2>
+              <h2 className="section-title text-2xl text-espresso sm:text-3xl">Benzer Ürünler</h2>
               {category && (
                 <Link
                   href={`/kategori/${category.slug}`}

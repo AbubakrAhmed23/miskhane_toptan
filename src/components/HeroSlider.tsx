@@ -7,8 +7,10 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 /**
  * Hero kategori carousel'i.
  *
- * Görseller katalogdan (yenikatalog1.pdf) alınan kategori kapak sahneleridir;
- * hepsi 1:1 oranında dışa aktarıldığı için geçişte layout shift olmaz.
+ * Görseller katalogdan (yenikatalog1.pdf) alınan kategori kapak sahneleridir.
+ * Doğal kadrajlarıyla, object-contain ile gösterilir: hiçbir ürün kırpılmaz ve
+ * yapay kenar uzatması (esneme) yapılmaz. Kap sabit kare olduğu için
+ * kareler arası geçişte layout shift oluşmaz.
  * Sıra, sitedeki kategori sırasına sadıktır (rastgele değil).
  */
 /**
@@ -84,7 +86,7 @@ export function HeroSlider() {
             priority={i === 0}
             loading="eager"
             sizes="(max-width: 1024px) 100vw, 560px"
-            className={`object-cover ${i === index && !reduced ? 'ken-burns' : ''}`}
+            className={`object-contain ${i === index && !reduced ? 'ken-burns' : ''}`}
             style={{
               opacity: i === index ? 1 : 0,
               transition: reduced ? 'none' : `opacity ${FADE}ms ease-in-out`,
@@ -94,7 +96,7 @@ export function HeroSlider() {
         ))}
 
         {/* Kategori etiketi pili */}
-        <span className="pointer-events-none absolute bottom-4 left-4 rounded-full bg-navy/85 px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-cream">
+        <span className="pointer-events-none absolute bottom-4 left-4 rounded-full bg-espresso/85 px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-cream">
           {active.label}
         </span>
       </Link>

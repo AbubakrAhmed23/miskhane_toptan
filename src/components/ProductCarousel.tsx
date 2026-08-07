@@ -62,7 +62,7 @@ export function ProductCarousel({
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
-            <h2 className="section-title mt-3 text-3xl text-navy sm:text-4xl">{title}</h2>
+            <h2 className="section-title mt-3 text-3xl text-espresso sm:text-4xl">{title}</h2>
           </div>
           <div className="flex items-center gap-4">
             <Link href={href} className="btn-link">
@@ -75,7 +75,7 @@ export function ProductCarousel({
                 onClick={() => scrollBy(-1)}
                 disabled={atStart}
                 aria-label="Önceki ürünler"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-clay/35 text-navy transition hover:border-amber hover:text-accent-text disabled:opacity-30"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-clay/35 text-espresso transition hover:border-amber hover:text-accent-text disabled:opacity-30"
               >
                 <ChevronLeftIcon className="h-4 w-4" />
               </button>
@@ -84,7 +84,7 @@ export function ProductCarousel({
                 onClick={() => scrollBy(1)}
                 disabled={atEnd}
                 aria-label="Sonraki ürünler"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-clay/35 text-navy transition hover:border-amber hover:text-accent-text disabled:opacity-30"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-clay/35 text-espresso transition hover:border-amber hover:text-accent-text disabled:opacity-30"
               >
                 <ChevronRightIcon className="h-4 w-4" />
               </button>
@@ -127,7 +127,7 @@ export function ProductCarousel({
                       {code}
                     </span>
                   ) : null}
-                  <h3 className="mt-1 font-serif text-lg leading-snug text-navy">{product.title}</h3>
+                  <h3 className="mt-1 font-serif text-lg leading-snug text-espresso">{product.title}</h3>
                   {price ? <p className="price mt-2 text-lg">{price}</p> : null}
                   {product.unitsPerBox ? (
                     <p className="mt-0.5 text-xs text-muted">Koli içi {product.unitsPerBox} adet</p>

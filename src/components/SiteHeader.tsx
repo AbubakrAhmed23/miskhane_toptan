@@ -57,7 +57,7 @@ export function SiteHeader({ settings }: { settings: Setting | null }) {
               key={item.href}
               href={item.href}
               className={`group relative text-sm font-medium tracking-wide transition-colors ${
-                isActive(item.href) ? 'text-accent-text' : 'text-navy/80 hover:text-accent-text'
+                isActive(item.href) ? 'text-accent-text' : 'text-espresso/80 hover:text-accent-text'
               }`}
             >
               {item.label}
@@ -75,7 +75,7 @@ export function SiteHeader({ settings }: { settings: Setting | null }) {
           <Link
             href="/urunler"
             aria-label="Ürünlerde ara"
-            className="hidden h-10 w-10 items-center justify-center rounded-full border border-clay/35 text-navy transition hover:border-amber hover:text-accent-text md:flex"
+            className="hidden h-10 w-10 items-center justify-center rounded-full border border-clay/35 text-espresso transition hover:border-amber hover:text-accent-text md:flex"
           >
             <SearchIcon className="h-4 w-4" strokeWidth={1.6} />
           </Link>
@@ -92,7 +92,7 @@ export function SiteHeader({ settings }: { settings: Setting | null }) {
             type="button"
             onClick={() => setOpen(true)}
             aria-label="Menüyü aç"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-clay/35 text-navy md:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-clay/35 text-espresso md:hidden"
           >
             <MenuIcon className="h-5 w-5" strokeWidth={1.6} />
           </button>
@@ -102,7 +102,7 @@ export function SiteHeader({ settings }: { settings: Setting | null }) {
       {open && (
         <div className="fixed inset-0 z-50 md:hidden">
           <div
-            className="absolute inset-0 bg-navy/50"
+            className="absolute inset-0 bg-espresso/50"
             onClick={() => setOpen(false)}
             aria-hidden="true"
           />
@@ -110,7 +110,7 @@ export function SiteHeader({ settings }: { settings: Setting | null }) {
             <div className="flex items-center justify-between">
               <Logo markSize={40} />
               <button type="button" onClick={() => setOpen(false)} aria-label="Menüyü kapat">
-                <CloseIcon className="h-6 w-6 text-navy" />
+                <CloseIcon className="h-6 w-6 text-espresso" />
               </button>
             </div>
             <nav className="mt-10 flex flex-col gap-1">
@@ -120,7 +120,7 @@ export function SiteHeader({ settings }: { settings: Setting | null }) {
                   href={item.href}
                   onClick={() => setOpen(false)}
                   className={`rounded-full px-4 py-3 text-base font-medium transition ${
-                    isActive(item.href) ? 'bg-clay/40 text-accent-text' : 'text-navy/80 hover:bg-clay/30'
+                    isActive(item.href) ? 'bg-clay/40 text-accent-text' : 'text-espresso/80 hover:bg-clay/30'
                   }`}
                 >
                   {item.label}

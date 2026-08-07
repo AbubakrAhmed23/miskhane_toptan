@@ -24,7 +24,7 @@ const ITEMS = [
 
 export function TrustBand() {
   return (
-    <section className="bg-navy text-white/75">
+    <section className="bg-espresso text-white/75">
       <div className="mx-auto grid w-full max-w-6xl gap-y-10 section-y px-5 sm:px-8 md:grid-cols-3 md:gap-y-0">
         {ITEMS.map(({ Icon, title, text }) => (
           <div key={title} className="flex flex-col items-center gap-3 px-6 text-center">

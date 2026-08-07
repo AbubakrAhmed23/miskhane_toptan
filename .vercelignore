@@ -1,0 +1,7 @@
+# Büyük kaynaklar deploy paketine girmesin
+/media
+/source-assets
+*.db
+*.db-*
+.next
+node_modules

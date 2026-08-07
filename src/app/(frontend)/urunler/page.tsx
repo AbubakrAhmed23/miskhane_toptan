@@ -40,7 +40,7 @@ export default async function ProductsPage({
       <section className="bg-cream">
         <div className="section-y mx-auto w-full max-w-6xl px-5 text-center sm:px-8">
           <p className="eyebrow">Miskhane Perfumes</p>
-          <h1 className="section-title mt-4 text-4xl text-navy sm:text-5xl md:text-6xl">KATALOG</h1>
+          <h1 className="section-title mt-4 text-4xl text-espresso sm:text-5xl md:text-6xl">KATALOG</h1>
           <p className="section-subtitle mt-3">Catalogue</p>
           <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-muted">
             {totalProducts} ürünlük toptan koleksiyon; parfüm ve esans şişelerinden kapaklara,
@@ -102,7 +102,7 @@ export default async function ProductsPage({
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-6">
-                  <h2 className="font-serif text-xl leading-snug text-navy">{category.name}</h2>
+                  <h2 className="font-serif text-xl leading-snug text-espresso">{category.name}</h2>
                   {category.nameEn ? (
                     <p className="mt-1 text-[0.62rem] uppercase tracking-[0.24em] text-muted">
                       {category.nameEn}

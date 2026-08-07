@@ -1,5 +1,5 @@
 /* Miskhane Toptan — tasarım sistemi.
-   Tüm renkler @theme içindeki 4 tokenden (navy · cream · amber · clay)
+   Tüm renkler @theme içindeki 4 tokenden (espresso · cream · amber · clay)
    ve nötr beyazdan türer; başka hiçbir yerde sabit renk kodu yoktur.
    Tipografi: Cormorant Garamond (başlık) + Inter (arayüz/veri) */
 @import 'tailwindcss';
@@ -9,7 +9,7 @@
      TEK KAYNAK PALET — sitedeki TÜM renkler bu 4 tokenden türer.
      Başka hiçbir dosyada sabit renk kodu (hex) bulunmaz.
      ================================================================ */
-  --color-navy: #0a2947; /* ana koyu: başlık, koyu bölümler, aktif nav */
+  --color-espresso: #3b2a18; /* ana koyu (sıcak bronz): başlık, koyu bölümler */
   --color-cream: #f5ede0; /* temel açık zemin: sayfa, hero, section */
   --color-amber: #c08a34; /* TEK vurgu: CTA dolgusu, rozet, ikon */
   --color-clay: #a9714f; /* YALNIZCA ayraç/border/pasif — dolgu ve metin DEĞİL */
@@ -19,13 +19,13 @@
 
   /* --------- Türetilmiş roller (yeni renk DEĞİL, yukarıdakilerin karışımı) --------- */
   /* Koyu zemin üzerinde ikincil metin */
-  --color-on-dark-muted: color-mix(in srgb, var(--color-cream) 72%, var(--color-navy));
-  /* Açık zeminde ikincil metin — clay metin olarak KULLANILMAZ, navy seyreltilir */
-  --color-text-muted: color-mix(in srgb, var(--color-navy) 68%, var(--color-cream));
+  --color-on-dark-muted: color-mix(in srgb, var(--color-cream) 72%, var(--color-espresso));
+  /* Açık zeminde ikincil metin — clay metin olarak KULLANILMAZ, espresso seyreltilir */
+  --color-text-muted: color-mix(in srgb, var(--color-espresso) 68%, var(--color-cream));
 
   /* --------- Geriye dönük takma adlar --------- */
-  --color-ink: var(--color-navy);
-  --color-text: var(--color-navy);
+  --color-ink: var(--color-espresso);
+  --color-text: var(--color-espresso);
   --color-accent: var(--color-amber);
   --color-gold: var(--color-amber);
   --color-gold-deep: var(--color-accent-text);
@@ -46,19 +46,19 @@
 
   /* Amber açık bir renktir: krem üzerinde yalnızca 2.61:1 verir, yani metin
      olarak KULLANILAMAZ. Açık zemindeki metinler (eyebrow, fiyat, link) için
-     navy ile koyulaştırılmış varyant → krem 4.97:1 / beyaz 5.78:1 (AA ✓). */
-  --color-accent-text: color-mix(in srgb, var(--color-amber) 60%, var(--color-navy));
+     espresso ile koyulaştırılmış varyant → krem 4.97:1 / beyaz 5.78:1 (AA ✓). */
+  --color-accent-text: color-mix(in srgb, var(--color-amber) 60%, var(--color-espresso));
 
   --color-whatsapp: var(--color-amber);
-  --color-whatsapp-dark: var(--color-navy);
+  --color-whatsapp-dark: var(--color-espresso);
 
   /* Yazı tipleri: Cormorant Garamond (başlık) + Inter (arayüz/gövde) + JetBrains Mono (kod/veri) */
   --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
   --font-serif: var(--font-cormorant), Georgia, 'Times New Roman', serif;
   --font-mono: var(--font-jbmono), ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
-  --shadow-soft: 0 1px 2px color-mix(in srgb, var(--color-navy) 6%, transparent), 0 12px 30px -14px color-mix(in srgb, var(--color-navy) 16%, transparent);
-  --shadow-card: 0 1px 3px color-mix(in srgb, var(--color-navy) 8%, transparent), 0 16px 40px -24px color-mix(in srgb, var(--color-navy) 22%, transparent);
+  --shadow-soft: 0 1px 2px color-mix(in srgb, var(--color-espresso) 6%, transparent), 0 12px 30px -14px color-mix(in srgb, var(--color-espresso) 16%, transparent);
+  --shadow-card: 0 1px 3px color-mix(in srgb, var(--color-espresso) 8%, transparent), 0 16px 40px -24px color-mix(in srgb, var(--color-espresso) 22%, transparent);
 
   /* ---- HAREKET SİSTEMİ: 3 standart süre + TEK easing ---- */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -84,7 +84,7 @@ body {
   margin: 0;
   min-height: 100vh;
   background: var(--color-cream);
-  color: var(--color-navy);
+  color: var(--color-espresso);
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.6;
@@ -126,7 +126,7 @@ img {
   gap: 0.1rem;
   padding: 0.45rem 1.6rem 0.55rem;
   background: var(--color-amber);
-  color: var(--color-navy);
+  color: var(--color-espresso);
   border-radius: 3px;
   text-align: center;
   box-shadow: none;
@@ -163,7 +163,7 @@ img {
   font-size: 1.05rem;
   font-weight: 500;
   letter-spacing: 0.05em;
-  color: var(--color-navy);
+  color: var(--color-espresso);
 }
 
 /* Teknik özellik şeridi — katalogdaki gri tablo */
@@ -183,7 +183,7 @@ img {
 .spec-strip__value {
   font-size: 0.8rem;
   font-weight: 400;
-  color: var(--color-navy);
+  color: var(--color-espresso);
   line-height: 1.2;
   white-space: nowrap;
 }
@@ -352,7 +352,7 @@ img {
   align-items: center;
   border-radius: 9999px;
   background: var(--color-amber);
-  color: var(--color-navy);
+  color: var(--color-espresso);
   padding: 0.25rem 0.7rem;
   font-size: 0.6rem;
   font-weight: 600;
@@ -360,10 +360,10 @@ img {
   text-transform: uppercase;
   line-height: 1.4;
 }
-/* Koyu varyant: .pill-badge'in navy metnini DEVRALMAZ — kendi açık metnini
-   tanımlar. (Amber dolgu için navy metne geçilince bu varyant görünmez olmuştu.) */
+/* Koyu varyant: .pill-badge'in koyu metnini DEVRALMAZ — kendi açık metnini
+   tanımlar. (Amber dolgu için koyu metne geçilince bu varyant görünmez olmuştu.) */
 .pill-badge--ink {
-  background: var(--color-navy);
+  background: var(--color-espresso);
   color: var(--color-cream);
 }
 
@@ -418,11 +418,11 @@ img {
   position: relative;
   overflow: hidden;
   background: var(--color-amber);
-  /* Amber orta-açık: üzerinde navy 4.87:1 (AA ✓), beyaz 3.03:1 (✗) */
-  color: var(--color-navy);
+  /* Amber orta-açık: üzerinde espresso 4.53:1 (AA ✓), beyaz 3.03:1 (✗) */
+  color: var(--color-espresso);
 }
 .btn-gold:hover {
-  background: color-mix(in srgb, var(--color-amber) 85%, var(--color-navy));
+  background: color-mix(in srgb, var(--color-amber) 85%, var(--color-espresso));
 }
 .btn-gold::after {
   content: '';
@@ -438,12 +438,12 @@ img {
 
 /* Koyu mürekkep buton (ikincil eylem) */
 .btn-ink {
-  background: var(--color-navy);
+  background: var(--color-espresso);
   color: var(--color-white);
   transition: background 0.25s var(--ease-out);
 }
 .btn-ink:hover {
-  background: color-mix(in srgb, var(--color-navy) 85%, var(--color-cream));
+  background: color-mix(in srgb, var(--color-espresso) 85%, var(--color-cream));
 }
 
 /* Çerçeveli ikincil buton */
@@ -457,7 +457,7 @@ img {
 }
 .btn-outline:hover {
   background: var(--color-amber);
-  color: var(--color-navy);
+  color: var(--color-espresso);
 }
 
 /* Kayan ürün şeridi (marquee) */
@@ -601,14 +601,14 @@ img {
   font-size: 1.6rem;
   font-weight: 700;
   margin-top: 1.5rem;
-  color: var(--color-navy);
+  color: var(--color-espresso);
 }
 .richtext h3 {
   font-family: var(--font-serif);
   font-size: 1.3rem;
   font-weight: 700;
   margin-top: 1.25rem;
-  color: var(--color-navy);
+  color: var(--color-espresso);
 }
 .richtext ul {
   list-style: disc;

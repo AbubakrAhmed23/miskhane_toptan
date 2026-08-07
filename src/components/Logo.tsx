@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 /**
  * Logo işaretindeki altın ton (logo-mark.png) BİLİNÇLİ bir marka istisnasıdır;
- * site paletine (navy/cream/sage/terracotta) dahil değildir ve terracotta'ya
+ * site paletine (espresso/cream/amber/clay) dahil değildir ve amber'e
  * çevrilmemelidir. Tasarım sisteminde `--color-logo-accent` olarak tanımlıdır.
  */
 
@@ -30,7 +30,7 @@ export function Logo({
         <span className="flex flex-col leading-none">
           <span
             className={`font-serif text-xl font-bold tracking-[0.14em] ${
-              onDark ? 'text-white' : 'text-navy'
+              onDark ? 'text-white' : 'text-espresso'
             }`}
           >
             MİSKHANE

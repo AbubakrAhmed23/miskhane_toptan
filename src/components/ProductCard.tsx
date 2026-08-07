@@ -44,7 +44,7 @@ export function ProductCard({ product }: { product: Product }) {
             {code}
           </span>
         ) : null}
-        <h3 className="mt-1 font-serif text-lg leading-snug text-navy">{product.title}</h3>
+        <h3 className="mt-1 font-serif text-lg leading-snug text-espresso">{product.title}</h3>
 
         {price ? <p className="price mt-2 text-lg">{price}</p> : null}
         {product.unitsPerBox ? (

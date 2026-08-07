@@ -50,7 +50,7 @@ export default async function HomePage() {
         <div className="section-y mx-auto grid w-full max-w-6xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-2">
           <div className="animate-fade-up">
             <p className="eyebrow">Miskhane Perfumes · Toptan</p>
-            <h1 className="section-title mt-5 text-4xl leading-[1.08] text-navy sm:text-5xl lg:text-6xl">
+            <h1 className="section-title mt-5 text-4xl leading-[1.08] text-espresso sm:text-5xl lg:text-6xl">
               Parfüm ambalajında <span className="gold-text">zarafet</span>
             </h1>
             <p className="mt-6 max-w-lg text-base leading-relaxed text-muted">
@@ -74,7 +74,7 @@ export default async function HomePage() {
               {HERO_FEATURES.map(({ Icon, label }) => (
                 <div key={label} className="icon-item">
                   <Icon className="h-7 w-7 text-accent-text" />
-                  <span className="icon-item__label text-navy">{label}</span>
+                  <span className="icon-item__label text-espresso">{label}</span>
                 </div>
               ))}
             </div>
@@ -97,7 +97,7 @@ export default async function HomePage() {
         <div className="section-y mx-auto w-full max-w-6xl px-5 sm:px-8">
           <Reveal className="max-w-2xl">
             <p className="eyebrow">Ürün Grupları</p>
-            <h2 className="section-title mt-3 text-3xl text-navy sm:text-4xl">
+            <h2 className="section-title mt-3 text-3xl text-espresso sm:text-4xl">
               <CountUp to={totalProducts} /> ürünlük katalog, {categories.length} grup
             </h2>
           </Reveal>
@@ -116,7 +116,7 @@ export default async function HomePage() {
                     />
                   </div>
                   <div className="flex flex-1 flex-col p-5">
-                    <h3 className="text-[0.72rem] font-semibold uppercase leading-snug tracking-[0.1em] text-navy">
+                    <h3 className="text-[0.72rem] font-semibold uppercase leading-snug tracking-[0.1em] text-espresso">
                       {category.name}
                     </h3>
                     <p className="mt-1 text-xs text-muted">{category.productCount} ürün</p>
@@ -152,7 +152,7 @@ export default async function HomePage() {
         <div className="section-y mx-auto grid w-full max-w-6xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-2">
           <Reveal>
             <p className="eyebrow">Hakkımızda</p>
-            <h2 className="section-title mt-4 text-3xl text-navy sm:text-4xl">
+            <h2 className="section-title mt-4 text-3xl text-espresso sm:text-4xl">
               Kokunun büyülü dünyasına adım atın.
             </h2>
             <div className="mt-6 space-y-4 text-sm leading-relaxed text-muted">
@@ -176,7 +176,7 @@ export default async function HomePage() {
           </Reveal>
 
           <Reveal delay={120}>
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl shadow-card">
+            <div className="relative aspect-[1700/2386] w-full overflow-hidden rounded-2xl shadow-card">
               <Image
                 src="/catalog/about.webp"
                 alt="Miskhane parfüm, difüzör ve oda kokusu ürünleri"

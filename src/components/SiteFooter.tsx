@@ -15,7 +15,7 @@ export function SiteFooter({
   const year = new Date().getFullYear()
 
   return (
-    <footer className="bg-navy text-white/70">
+    <footer className="bg-espresso text-white/70">
       {/* Krem gövdeden koyu footer'a yumuşak geçiş: ince altın gradient bant */}
       <div
         aria-hidden="true"

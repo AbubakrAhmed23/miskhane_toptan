@@ -68,11 +68,11 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
               Katalog
             </Link>
             <span className="text-muted">/</span>
-            <span className="text-navy">{category.name}</span>
+            <span className="text-espresso">{category.name}</span>
           </nav>
 
           <header className="text-center">
-            <h1 className="section-title text-4xl text-navy sm:text-5xl md:text-6xl">
+            <h1 className="section-title text-4xl text-espresso sm:text-5xl md:text-6xl">
               {category.name.toLocaleUpperCase('tr-TR')}
             </h1>
             {category.nameEn ? (

@@ -16,7 +16,7 @@ export default async function ContactPage() {
     <div className="mx-auto w-full max-w-5xl section-y px-5 sm:px-8">
       <header className="mb-12">
         <p className="text-xs font-semibold uppercase tracking-[0.35em] text-accent-text">İletişim</p>
-        <h1 className="mt-4 font-serif text-4xl font-semibold text-navy sm:text-5xl">
+        <h1 className="mt-4 font-serif text-4xl font-semibold text-espresso sm:text-5xl">
           Bize Ulaşın
         </h1>
         <p className="mt-4 max-w-xl text-muted">
@@ -28,7 +28,7 @@ export default async function ContactPage() {
       <div className="grid gap-8 md:grid-cols-2">
         <div className="space-y-4">
           <div className="rounded-2xl border border-amber/30 bg-amber/10 p-6">
-            <h2 className="font-serif text-xl font-semibold text-navy">WhatsApp Destek Hattı</h2>
+            <h2 className="font-serif text-xl font-semibold text-espresso">WhatsApp Destek Hattı</h2>
             <p className="mt-1 text-sm text-muted">Mesajınıza en kısa sürede yanıt veriyoruz.</p>
             <div className="mt-4">
               <WhatsAppButton
@@ -48,7 +48,7 @@ export default async function ContactPage() {
                   <p className="text-xs uppercase tracking-wider text-muted">Telefon</p>
                   <a
                     href={`tel:${settings.phone.replace(/\s/g, '')}`}
-                    className="font-medium text-navy hover:text-accent-text"
+                    className="font-medium text-espresso hover:text-accent-text"
                   >
                     {settings.phone}
                   </a>
@@ -64,7 +64,7 @@ export default async function ContactPage() {
                   <p className="text-xs uppercase tracking-wider text-muted">E-posta</p>
                   <a
                     href={`mailto:${settings.email}`}
-                    className="font-medium text-navy hover:text-accent-text"
+                    className="font-medium text-espresso hover:text-accent-text"
                   >
                     {settings.email}
                   </a>
@@ -78,7 +78,7 @@ export default async function ContactPage() {
                 </span>
                 <div>
                   <p className="text-xs uppercase tracking-wider text-muted">Adres</p>
-                  <p className="whitespace-pre-line font-medium text-navy">{settings.address}</p>
+                  <p className="whitespace-pre-line font-medium text-espresso">{settings.address}</p>
                 </div>
               </li>
             )}

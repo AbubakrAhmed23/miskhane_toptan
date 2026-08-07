@@ -58,3 +58,4 @@ node_modules/
 
 # Üretim içe aktarma değişkenleri (gizli)
 .env.production
+.env*
