@@ -1,4 +1,8 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig, GenerateImageName } from 'payload'
+
+/** Türev görsel adı: ad-boyut-genişlikxyükseklik.uzantı — boyut adı çakışmayı önler. */
+const nameWithSize: GenerateImageName = ({ extension, height, originalName, sizeName, width }) =>
+  `${originalName}-${sizeName}-${width}x${height}.${extension}`
 
 export const Media: CollectionConfig = {
   slug: 'media',
@@ -25,24 +29,33 @@ export const Media: CollectionConfig = {
     // Orijinal PNG birebir saklanır; ürün detay sayfasında bu orijinal gösterilir.
     // Türetilen boyutlar yalnızca liste/ızgara görünümleri içindir ve
     // `withoutEnlargement` sayesinde asla büyütme (upscale) yapmaz.
+    //
+    // Dosya adına boyut adı da yazılır. Payload'ın varsayılan adlandırması yalnızca
+    // genişlik×yükseklik kullanır; katalog görsellerinin çoğu 900 pikselden dar
+    // olduğu için `withoutEnlargement` ile card ve large aynı ölçüye inip aynı adı
+    // üretiyordu. Yerel diskte bu sessizce üzerine yazıyordu, Vercel Blob ise
+    // eşzamanlı ikinci yazımı reddediyor ("blob already exists").
     imageSizes: [
       {
         name: 'thumbnail',
         width: 500,
         withoutEnlargement: true,
         formatOptions: { format: 'webp', options: { quality: 90 } },
+        generateImageName: nameWithSize,
       },
       {
         name: 'card',
         width: 900,
         withoutEnlargement: true,
         formatOptions: { format: 'webp', options: { quality: 92 } },
+        generateImageName: nameWithSize,
       },
       {
         name: 'large',
         width: 1600,
         withoutEnlargement: true,
         formatOptions: { format: 'webp', options: { quality: 95 } },
+        generateImageName: nameWithSize,
       },
     ],
   },
