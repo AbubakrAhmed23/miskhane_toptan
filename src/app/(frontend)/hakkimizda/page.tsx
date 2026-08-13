@@ -17,6 +17,10 @@ const VALUES = [
   { title: 'Güven', text: 'Toptan müşterilerimize şeffaf ve hızlı iletişim.' },
 ]
 
+// Site Ayarları panelden değiştiğinde statik çıktı bayatlamasın diye yenilenir
+// (kategori sayfasıyla aynı aralık).
+export const revalidate = 300
+
 export default async function AboutPage() {
   const settings = await getSettings()
 

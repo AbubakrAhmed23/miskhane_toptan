@@ -32,6 +32,10 @@ const HERO_FEATURES = [
   { Icon: TruckIcon, label: 'Koli Bazlı Tedarik' },
 ]
 
+// Site Ayarları panelden değiştiğinde statik çıktı bayatlamasın diye yenilenir
+// (kategori sayfasıyla aynı aralık).
+export const revalidate = 300
+
 export default async function HomePage() {
   const [settings, categories, featured, catalog] = await Promise.all([
     getSettings(),

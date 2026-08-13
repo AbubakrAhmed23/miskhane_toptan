@@ -9,6 +9,10 @@ export const metadata: Metadata = {
   description: 'Miskhane Toptan ile iletişime geçin. WhatsApp, telefon ve e-posta.',
 }
 
+// Site Ayarları panelden değiştiğinde statik çıktı bayatlamasın diye yenilenir
+// (kategori sayfasıyla aynı aralık).
+export const revalidate = 300
+
 export default async function ContactPage() {
   const settings = await getSettings()
 
