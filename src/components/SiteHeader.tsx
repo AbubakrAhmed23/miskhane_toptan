@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 
 import type { Setting } from '@/payload-types'
 import { waLink } from '@/lib/whatsapp'
@@ -21,6 +22,12 @@ export function SiteHeader({ settings }: { settings: Setting | null }) {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  /* Mobil menü body'ye taşınır. Header'daki `backdrop-blur` (backdrop-filter)
+     içindeki `fixed` öğeler için kapsayıcı blok oluşturduğundan, panel header
+     kutusuna hapsoluyor ve arka planı yalnızca header yüksekliği kadar
+     çiziliyordu. Portal bunu kökten çözer. */
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -29,8 +36,7 @@ export function SiteHeader({ settings }: { settings: Setting | null }) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const isActive = (href: string) =>
-    href === '/' ? pathname === '/' : pathname.startsWith(href)
+  const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href))
 
   return (
     <header
@@ -99,47 +105,56 @@ export function SiteHeader({ settings }: { settings: Setting | null }) {
         </div>
       </div>
 
-      {open && (
-        <div className="fixed inset-0 z-50 md:hidden">
-          <div
-            className="absolute inset-0 bg-espresso/50"
-            onClick={() => setOpen(false)}
-            aria-hidden="true"
-          />
-          <div className="absolute right-0 top-0 flex h-full w-72 max-w-[82%] flex-col border-l border-clay bg-white p-6 shadow-card">
-            <div className="flex items-center justify-between">
-              <Logo markSize={40} />
-              <button type="button" onClick={() => setOpen(false)} aria-label="Menüyü kapat">
-                <CloseIcon className="h-6 w-6 text-espresso" />
-              </button>
-            </div>
-            <nav className="mt-10 flex flex-col gap-1">
-              {NAV.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className={`rounded-full px-4 py-3 text-base font-medium transition ${
-                    isActive(item.href) ? 'bg-clay/40 text-accent-text' : 'text-espresso/80 hover:bg-clay/30'
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
-            <a
-              href={waLink(settings?.whatsappNumber, settings?.whatsappDefaultMessage)}
-              target="_blank"
-              rel="noopener noreferrer"
+      {open &&
+        mounted &&
+        createPortal(
+          <div className="fixed inset-0 z-50 md:hidden">
+            <div
+              className="absolute inset-0 bg-espresso/50"
               onClick={() => setOpen(false)}
-              className="btn btn-gold mt-8"
-            >
-              <WhatsAppIcon className="h-5 w-5" />
-              WhatsApp ile İletişim
-            </a>
-          </div>
-        </div>
-      )}
+              aria-hidden="true"
+            />
+            <div className="absolute right-0 top-0 flex h-full w-72 max-w-[82%] flex-col border-l border-clay bg-white p-6 shadow-card">
+              <div className="flex items-center justify-between">
+                <Logo markSize={40} />
+                <button type="button" onClick={() => setOpen(false)} aria-label="Menüyü kapat">
+                  <CloseIcon className="h-6 w-6 text-espresso" />
+                </button>
+              </div>
+              <nav className="mt-10 flex flex-col gap-1">
+                {NAV.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    /* Aktif öğe önce bg-clay/40 + text-accent-text idi: kontrast 3.26:1
+                     (AA sınırı 4.5:1) ve clay dolgu olarak kullanılıyordu — paletin
+                     "clay yalnızca ayraç/border" kuralına aykırı. Krem zemin + altın
+                     halka 4.59:1 veriyor ve kurala uyuyor. */
+                    className={`rounded-full px-4 py-3 text-base font-medium transition ${
+                      isActive(item.href)
+                        ? 'gold-text bg-cream ring-1 ring-amber/45'
+                        : 'text-espresso/80 hover:bg-cream hover:text-espresso'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </nav>
+              <a
+                href={waLink(settings?.whatsappNumber, settings?.whatsappDefaultMessage)}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                className="btn btn-gold mt-8"
+              >
+                <WhatsAppIcon className="h-5 w-5" />
+                WhatsApp ile İletişim
+              </a>
+            </div>
+          </div>,
+          document.body,
+        )}
     </header>
   )
 }
