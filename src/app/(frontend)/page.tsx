@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { HeroSlider } from '@/components/HeroSlider'
+import { HeroCarousel } from '@/components/HeroCarousel'
 import { MediaImage } from '@/components/MediaImage'
 import { ProductCarousel } from '@/components/ProductCarousel'
 import { CountUp } from '@/components/CountUp'
@@ -14,7 +14,6 @@ import {
   BoxIcon,
   SparkleIcon,
   TruckIcon,
-  WhatsAppIcon,
 } from '@/components/icons'
 import {
   getCategoriesWithCounts,
@@ -49,44 +48,19 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* ---- (C) Hero: sol metin + sağa taşan, çerçevesiz arka plan fotoğrafı ---- */}
+      {/* ---- (C) Hero: solda tam kadraj görsel, sağda başlık + tek eylem ---- */}
+      <HeroCarousel waHref={wa} heroSubtitle={settings?.heroSubtitle ?? undefined} />
+
+      {/* Hero altındaki 4'lü ikon + etiket satırı */}
       <section className="bg-cream">
-        <div className="section-y mx-auto grid w-full max-w-6xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-2">
-          <div className="animate-fade-up">
-            <p className="eyebrow">Miskhane Perfumes · Toptan</p>
-            <h1 className="section-title mt-5 text-4xl leading-[1.08] text-espresso sm:text-5xl lg:text-6xl">
-              Parfüm ambalajında <span className="gold-text">zarafet</span>
-            </h1>
-            <p className="mt-6 max-w-lg text-base leading-relaxed text-muted">
-              {settings?.heroSubtitle ||
-                'Parfüm ve esans şişeleri, kapaklar, valfler, kolonyalar, oda kokuları ve buhurlar. Toptan fiyat ve numune için WhatsApp üzerinden bize ulaşın.'}
-            </p>
-
-            <div className="mt-9 flex flex-wrap items-center gap-3">
-              <a href={wa} target="_blank" rel="noopener noreferrer" className="btn btn-gold">
-                <WhatsAppIcon className="h-5 w-5" />
-                WhatsApp ile Teklif Al
-              </a>
-              <Link href="/urunler" className="btn btn-outline">
-                Kataloğu İncele
-                <ArrowIcon className="h-4 w-4" />
-              </Link>
-            </div>
-
-            {/* 4'lü ikon + etiket satırı */}
-            <div className="mt-12 grid grid-cols-2 gap-x-4 gap-y-8 pt-2 sm:grid-cols-4">
-              {HERO_FEATURES.map(({ Icon, label }) => (
-                <div key={label} className="icon-item">
-                  <Icon className="h-7 w-7 text-accent-text" />
-                  <span className="icon-item__label text-espresso">{label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Katalogdaki kategori kapak fotoğrafları saniyede bir değişir */}
-          <div className="animate-fade-up [animation-delay:150ms]">
-            <HeroSlider />
+        <div className="section-pb mx-auto w-full max-w-6xl px-5 sm:px-8">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-8 border-t border-espresso/10 pt-12 sm:grid-cols-4">
+            {HERO_FEATURES.map(({ Icon, label }) => (
+              <div key={label} className="icon-item">
+                <Icon className="h-7 w-7 text-accent-text" />
+                <span className="icon-item__label text-espresso">{label}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>

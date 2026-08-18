@@ -319,6 +319,25 @@ img {
   padding: 0.6rem 1.25rem;
   font-size: 0.8rem;
 }
+/* Hero'daki ferah hap buton */
+.btn-lg {
+  padding: 1.05rem 2.4rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* Beyaz hap buton — hero karelerindeki sakin birincil eylem.
+   Krem zemin üzerinde beyaz dolgu + espresso metin (12.0:1). */
+.btn-white {
+  background: var(--color-white);
+  color: var(--color-espresso);
+  box-shadow: var(--shadow-soft);
+}
+.btn-white:hover {
+  background: var(--color-espresso);
+  color: var(--color-cream);
+}
 
 /* Üçüncül aksiyon: ok ikonlu metin linki */
 .btn-link {
