@@ -12,9 +12,9 @@
   --color-espresso: #14303e; /* ana koyu (derin petrol): başlık, koyu bölümler.
                                 Mavinin (#66a3bf) koyu türevi — krem üzerinde 12.0:1,
                                 mavi dolgu üzerinde 4.97:1 (AA ✓). */
-  --color-cream: #f2efe7; /* temel açık zemin: sayfa, hero, section */
+  --color-cream: #faf3e1; /* temel açık zemin: sayfa, hero, section */
   --color-amber: #66a3bf; /* TEK vurgu: CTA dolgusu, rozet, ikon */
-  --color-clay: #c8dfdb; /* YALNIZCA ayraç/border/pasif — dolgu ve metin DEĞİL */
+  --color-clay: #f5e7c6; /* sıcak kum tint'i: şerit ve tablo zemini — metin DEĞİL */
 
   /* Nötr yüzey — kart/içerik zemini */
   --color-white: #ffffff;
@@ -24,6 +24,11 @@
   --color-on-dark-muted: color-mix(in srgb, var(--color-cream) 72%, var(--color-espresso));
   /* Açık zeminde ikincil metin — clay metin olarak KULLANILMAZ, espresso seyreltilir */
   --color-text-muted: color-mix(in srgb, var(--color-espresso) 68%, var(--color-cream));
+  /* Ayraç/çerçeve — clay artık açık bir kum tonu olduğu için (beyaz üzerinde
+     1.05:1) border rolünü taşıyamaz. Tüm hairline'lar espresso'nun saydam
+     seyreltmesidir; beyaz üzerinde 1.36:1, krem üzerinde 1.35:1 — iki zeminde
+     de aynı ağırlıkta ince çizgi (referans: Tailwind gray-200 ≈ 1.24:1). */
+  --color-border: color-mix(in srgb, var(--color-espresso) 16%, transparent);
 
   /* --------- Geriye dönük takma adlar --------- */
   --color-ink: var(--color-espresso);
@@ -38,7 +43,7 @@
   --color-cream-alt: var(--color-cream);
   --color-surface: var(--color-white);
   --color-paper: var(--color-white);
-  --color-line: var(--color-clay);
+  --color-line: var(--color-border);
   --color-spec: var(--color-clay);
   --color-muted: var(--color-text-muted);
 
@@ -151,7 +156,7 @@ img {
 /* Katalogun alt kenarındaki altın bant */
 .gold-band {
   height: 1px;
-  background: var(--color-clay);
+  background: var(--color-border);
 }
 
 /* Ayraç sayfalarındaki ince altın çerçeve */

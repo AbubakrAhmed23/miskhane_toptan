@@ -60,7 +60,7 @@ export default async function AboutPage() {
 
       <div className="mt-14 grid gap-6 sm:grid-cols-3">
         {VALUES.map((v) => (
-          <div key={v.title} className="rounded-xl border border-clay/35 bg-white p-6">
+          <div key={v.title} className="rounded-xl border border-border bg-white p-6">
             <span className="flex h-10 w-10 items-center justify-center rounded-full bg-amber/15 text-accent-text">
               <CheckIcon className="h-5 w-5" />
             </span>
@@ -70,7 +70,7 @@ export default async function AboutPage() {
         ))}
       </div>
 
-      <div className="mt-14 flex flex-col items-center gap-4 rounded-2xl border border-clay/35 bg-cream px-6 py-14 text-center">
+      <div className="mt-14 flex flex-col items-center gap-4 rounded-2xl border border-border bg-cream px-6 py-14 text-center">
         <h2 className="font-serif text-2xl font-semibold text-espresso sm:text-3xl">
           Bizimle çalışmak ister misiniz?
         </h2>

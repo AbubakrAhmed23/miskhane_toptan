@@ -54,7 +54,7 @@ export default async function HomePage() {
       {/* Hero altındaki 4'lü ikon + etiket satırı */}
       <section className="bg-cream">
         <div className="section-pb mx-auto w-full max-w-6xl px-5 sm:px-8">
-          <div className="grid grid-cols-2 gap-x-4 gap-y-8 border-t border-espresso/10 pt-12 sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-8 border-t border-border pt-12 sm:grid-cols-4">
             {HERO_FEATURES.map(({ Icon, label }) => (
               <div key={label} className="icon-item">
                 <Icon className="h-7 w-7 text-accent-text" />
@@ -84,7 +84,7 @@ export default async function HomePage() {
             {categories.map((category, i) => (
               <Reveal key={category.id} delay={(i % 5) * 70}>
                 <Link href={`/kategori/${category.slug}`} className="card group flex h-full flex-col overflow-hidden">
-                  <div className="relative aspect-square overflow-hidden rounded-t-2xl border-b border-clay/40 bg-white">
+                  <div className="relative aspect-square overflow-hidden rounded-t-2xl border-b border-border bg-white">
                     <MediaImage
                       media={category.image}
                       size="card"

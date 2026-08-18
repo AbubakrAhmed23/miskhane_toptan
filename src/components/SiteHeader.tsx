@@ -81,7 +81,7 @@ export function SiteHeader({ settings }: { settings: Setting | null }) {
           <Link
             href="/urunler"
             aria-label="Ürünlerde ara"
-            className="hidden h-10 w-10 items-center justify-center rounded-full border border-clay/35 text-espresso transition hover:border-amber hover:text-accent-text md:flex"
+            className="hidden h-10 w-10 items-center justify-center rounded-full border border-border text-espresso transition hover:border-amber hover:text-accent-text md:flex"
           >
             <SearchIcon className="h-4 w-4" strokeWidth={1.6} />
           </Link>
@@ -98,7 +98,7 @@ export function SiteHeader({ settings }: { settings: Setting | null }) {
             type="button"
             onClick={() => setOpen(true)}
             aria-label="Menüyü aç"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-clay/35 text-espresso md:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-espresso md:hidden"
           >
             <MenuIcon className="h-5 w-5" strokeWidth={1.6} />
           </button>
@@ -114,7 +114,7 @@ export function SiteHeader({ settings }: { settings: Setting | null }) {
               onClick={() => setOpen(false)}
               aria-hidden="true"
             />
-            <div className="absolute right-0 top-0 flex h-full w-72 max-w-[82%] flex-col border-l border-clay bg-white p-6 shadow-card">
+            <div className="absolute right-0 top-0 flex h-full w-72 max-w-[82%] flex-col border-l border-border bg-white p-6 shadow-card">
               <div className="flex items-center justify-between">
                 <Logo markSize={40} />
                 <button type="button" onClick={() => setOpen(false)} aria-label="Menüyü kapat">

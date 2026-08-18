@@ -38,7 +38,7 @@ export function ProductGallery({ product }: { product: Product }) {
               onClick={() => setActive(i)}
               aria-label={`${i + 1}. görsel`}
               className={`relative aspect-square overflow-hidden rounded-xl border bg-white transition ${
-                i === active ? 'border-amber' : 'border-clay hover:border-amber/60'
+                i === active ? 'border-amber' : 'border-border hover:border-amber/60'
               }`}
             >
               <MediaImage

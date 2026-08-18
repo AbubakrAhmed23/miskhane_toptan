@@ -42,7 +42,7 @@ export default async function ContactPage() {
             </div>
           </div>
 
-          <ul className="space-y-4 rounded-2xl border border-clay/35 bg-white p-6">
+          <ul className="space-y-4 rounded-2xl border border-border bg-white p-6">
             {settings?.phone && (
               <li className="flex items-center gap-3">
                 <span className="flex h-10 w-10 items-center justify-center rounded-full bg-cream text-accent-text">
@@ -90,7 +90,7 @@ export default async function ContactPage() {
         </div>
 
         {settings?.mapEmbedUrl ? (
-          <div className="overflow-hidden rounded-2xl border border-clay/35">
+          <div className="overflow-hidden rounded-2xl border border-border">
             <iframe
               src={settings.mapEmbedUrl}
               title="Harita"
@@ -100,7 +100,7 @@ export default async function ContactPage() {
             />
           </div>
         ) : (
-          <div className="flex min-h-[360px] items-center justify-center rounded-2xl border border-dashed border-clay bg-white p-6 text-center text-muted">
+          <div className="flex min-h-[360px] items-center justify-center rounded-2xl border border-dashed border-border bg-white p-6 text-center text-muted">
             Harita, yönetim panelinden “Google Harita Embed Bağlantısı” eklendiğinde burada
             görünecektir.
           </div>

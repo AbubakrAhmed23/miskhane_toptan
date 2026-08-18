@@ -143,7 +143,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               <SpecStrip product={product} className="spec-strip--lg mt-6" />
 
               {specs.length > 0 && (
-                <dl className="mt-8 divide-y divide-clay/70">
+                <dl className="mt-8 divide-y divide-border">
                   {specs.map((row) => (
                     <div key={row.label} className="flex items-center justify-between gap-4 py-2.5">
                       <dt className="text-xs uppercase tracking-[0.14em] text-muted">

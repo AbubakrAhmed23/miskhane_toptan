@@ -75,7 +75,7 @@ export function ProductCarousel({
                 onClick={() => scrollBy(-1)}
                 disabled={atStart}
                 aria-label="Önceki ürünler"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-clay/35 text-espresso transition hover:border-amber hover:text-accent-text disabled:opacity-30"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-espresso transition hover:border-amber hover:text-accent-text disabled:opacity-30"
               >
                 <ChevronLeftIcon className="h-4 w-4" />
               </button>
@@ -84,7 +84,7 @@ export function ProductCarousel({
                 onClick={() => scrollBy(1)}
                 disabled={atEnd}
                 aria-label="Sonraki ürünler"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-clay/35 text-espresso transition hover:border-amber hover:text-accent-text disabled:opacity-30"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-espresso transition hover:border-amber hover:text-accent-text disabled:opacity-30"
               >
                 <ChevronRightIcon className="h-4 w-4" />
               </button>
@@ -102,7 +102,7 @@ export function ProductCarousel({
                 href={`/urun/${product.slug}`}
                 className="card group flex w-[220px] flex-col overflow-hidden sm:w-[250px]"
               >
-                <div className="relative aspect-square overflow-hidden rounded-t-2xl border-b border-clay/40 bg-white">
+                <div className="relative aspect-square overflow-hidden rounded-t-2xl border-b border-border bg-white">
                   <MediaImage
                     media={firstProductImage(product)}
                     size="card"

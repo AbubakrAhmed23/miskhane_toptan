@@ -92,7 +92,7 @@ export default async function ProductsPage({
                 href={`/kategori/${category.slug}`}
                 className="card group flex h-full flex-col overflow-hidden"
               >
-                <div className="relative aspect-square overflow-hidden rounded-t-2xl border-b border-clay/40 bg-white">
+                <div className="relative aspect-square overflow-hidden rounded-t-2xl border-b border-border bg-white">
                   <MediaImage
                     media={category.image}
                     size="card"
