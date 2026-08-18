@@ -9,11 +9,10 @@
      TEK KAYNAK PALET — sitedeki TÜM renkler bu 4 tokenden türer.
      Başka hiçbir dosyada sabit renk kodu (hex) bulunmaz.
      ================================================================ */
-  --color-espresso: #14303e; /* ana koyu (derin petrol): başlık, koyu bölümler.
-                                Mavinin (#66a3bf) koyu türevi — krem üzerinde 12.0:1,
-                                mavi dolgu üzerinde 4.97:1 (AA ✓). */
+  --color-espresso: #14303e; /* ana koyu (derin petrol): başlık, koyu bölümler,
+                                birincil buton dolgusu. Krem üzerinde 12.5:1. */
   --color-cream: #faf3e1; /* temel açık zemin: sayfa, hero, section */
-  --color-amber: #66a3bf; /* TEK vurgu: CTA dolgusu, rozet, ikon */
+  --color-amber: #fff3c8; /* yumuşak vurgu tint'i: rozet, şerit, panel — DOLGU eylemi DEĞİL */
   --color-clay: #f5e7c6; /* sıcak kum tint'i: şerit ve tablo zemini — metin DEĞİL */
 
   /* Nötr yüzey — kart/içerik zemini */
@@ -51,13 +50,13 @@
      migrasyona dahil DEĞİLDİR. logo-mark.png'nin kendi tonuyla eşleşir. */
   --color-logo-accent: #c6a45c;
 
-  /* Vurgu mavisi açık bir renktir: krem üzerinde yalnızca 2.65:1 verir, yani metin
-     olarak KULLANILAMAZ. Açık zemindeki metinler (eyebrow, fiyat, link) için
-     espresso ile koyulaştırılmış varyant → krem 5.12:1 / beyaz 5.89:1 (AA ✓). */
-  --color-accent-text: color-mix(in srgb, var(--color-amber) 50%, var(--color-espresso));
+  /* Amber pale bir tereyağı tonudur: krem üzerinde 1.00:1, yani ne metin ne de
+     dolgu olarak KULLANILAMAZ. Açık zemindeki vurgu metinleri (eyebrow, fiyat,
+     link) için espresso'ya yaklaştırılmış varyant → krem 5.9:1 (AA ✓). */
+  --color-accent-text: color-mix(in srgb, var(--color-amber) 25%, var(--color-espresso));
 
-  --color-whatsapp: var(--color-amber);
-  --color-whatsapp-dark: var(--color-espresso);
+  --color-whatsapp: var(--color-espresso);
+  --color-whatsapp-dark: color-mix(in srgb, var(--color-espresso) 82%, var(--color-cream));
 
   /* Yazı tipleri: Cormorant Garamond (başlık) + Inter (arayüz/gövde) + JetBrains Mono (kod/veri) */
   --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
@@ -105,8 +104,8 @@ img {
 }
 
 ::selection {
-  background: var(--color-amber);
-  color: var(--color-white);
+  background: var(--color-espresso);
+  color: var(--color-cream);
 }
 
 /* Altın vurgu metni (katalogdaki altın serif başlıklar) */
@@ -117,7 +116,7 @@ img {
 /* İnce altın çizgi */
 .gold-rule {
   height: 2px;
-  background: linear-gradient(90deg, var(--color-amber), transparent);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--color-espresso) 45%, transparent), transparent);
 }
 
 /* ------------------------------------------------------------------
@@ -161,7 +160,7 @@ img {
 
 /* Ayraç sayfalarındaki ince altın çerçeve */
 .gold-frame {
-  box-shadow: inset 0 0 0 1px var(--color-amber);
+  box-shadow: inset 0 0 0 1px var(--color-border);
 }
 
 /* Ürün kodu — katalogda görselin üstünde, seyrek harf aralıklı serif */
@@ -443,12 +442,13 @@ img {
 .btn-gold {
   position: relative;
   overflow: hidden;
-  background: var(--color-amber);
-  /* Vurgu mavisi orta-açık: üzerinde espresso 4.97:1 (AA ✓), beyaz 2.78:1 (✗) */
-  color: var(--color-espresso);
+  /* Amber artık pale bir tint (krem zeminde 1.00:1) — dolgu eylemi taşıyamaz.
+     Birincil buton espresso dolgu + krem metin: 12.5:1 (AAA ✓). */
+  background: var(--color-espresso);
+  color: var(--color-cream);
 }
 .btn-gold:hover {
-  background: color-mix(in srgb, var(--color-amber) 85%, var(--color-espresso));
+  background: color-mix(in srgb, var(--color-espresso) 82%, var(--color-cream));
 }
 .btn-gold::after {
   content: '';
@@ -474,7 +474,7 @@ img {
 
 /* Çerçeveli ikincil buton */
 .btn-outline {
-  border: 1px solid var(--color-amber);
+  border: 1px solid var(--color-espresso);
   color: var(--color-accent-text);
   background: transparent;
   transition:
@@ -482,8 +482,8 @@ img {
     color 0.25s var(--ease-out);
 }
 .btn-outline:hover {
-  background: var(--color-amber);
-  color: var(--color-espresso);
+  background: var(--color-espresso);
+  color: var(--color-cream);
 }
 
 /* Kayan ürün şeridi (marquee) */
@@ -645,7 +645,7 @@ img {
   padding-left: 1.25rem;
 }
 .richtext a {
-  color: var(--color-amber);
+  color: var(--color-accent-text);
   text-decoration: underline;
 }
 
@@ -744,11 +744,11 @@ img {
   86%,
   100% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-amber) 55%, transparent);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-espresso) 45%, transparent);
   }
   90% {
     transform: scale(1.06);
-    box-shadow: 0 0 0 10px color-mix(in srgb, var(--color-amber) 0%, transparent);
+    box-shadow: 0 0 0 10px color-mix(in srgb, var(--color-espresso) 0%, transparent);
   }
   95% {
     transform: scale(1);

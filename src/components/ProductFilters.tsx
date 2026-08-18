@@ -39,8 +39,8 @@ export function ProductFilters({
   const chipClass = (isActive: boolean) =>
     `whitespace-nowrap rounded-full border px-4 py-2 text-sm font-medium transition ${
       isActive
-        ? 'border-amber bg-amber text-espresso'
-        : 'border-border bg-white text-espresso hover:border-amber hover:text-accent-text'
+        ? 'border-espresso bg-espresso text-cream'
+        : 'border-border bg-white text-espresso hover:border-espresso hover:text-accent-text'
     }`
 
   return (
@@ -52,7 +52,7 @@ export function ProductFilters({
           onChange={(e) => setValue(e.target.value)}
           placeholder="Ürün kodu veya adı ile ara..."
           aria-label="Ürün ara"
-          className="w-full rounded-full border border-border bg-white py-3 pl-12 pr-24 text-sm text-espresso outline-none transition placeholder:text-muted focus:border-amber"
+          className="w-full rounded-full border border-border bg-white py-3 pl-12 pr-24 text-sm text-espresso outline-none transition placeholder:text-muted focus:border-espresso"
         />
         <button
           type="submit"

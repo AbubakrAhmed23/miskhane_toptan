@@ -68,7 +68,7 @@ export function SiteHeader({ settings }: { settings: Setting | null }) {
             >
               {item.label}
               <span
-                className={`absolute -bottom-1.5 left-0 h-px bg-amber transition-all duration-300 ${
+                className={`absolute -bottom-1.5 left-0 h-px bg-espresso transition-all duration-300 ${
                   isActive(item.href) ? 'w-full' : 'w-0 group-hover:w-full'
                 }`}
               />
@@ -81,7 +81,7 @@ export function SiteHeader({ settings }: { settings: Setting | null }) {
           <Link
             href="/urunler"
             aria-label="Ürünlerde ara"
-            className="hidden h-10 w-10 items-center justify-center rounded-full border border-border text-espresso transition hover:border-amber hover:text-accent-text md:flex"
+            className="hidden h-10 w-10 items-center justify-center rounded-full border border-border text-espresso transition hover:border-espresso hover:text-accent-text md:flex"
           >
             <SearchIcon className="h-4 w-4" strokeWidth={1.6} />
           </Link>
@@ -133,7 +133,7 @@ export function SiteHeader({ settings }: { settings: Setting | null }) {
                      halka 4.59:1 veriyor ve kurala uyuyor. */
                     className={`rounded-full px-4 py-3 text-base font-medium transition ${
                       isActive(item.href)
-                        ? 'gold-text bg-cream ring-1 ring-amber/45'
+                        ? 'gold-text bg-cream ring-1 ring-espresso/25'
                         : 'text-espresso/80 hover:bg-cream hover:text-espresso'
                     }`}
                   >

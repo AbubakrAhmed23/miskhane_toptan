@@ -61,7 +61,7 @@ export default async function AboutPage() {
       <div className="mt-14 grid gap-6 sm:grid-cols-3">
         {VALUES.map((v) => (
           <div key={v.title} className="rounded-xl border border-border bg-white p-6">
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-amber/15 text-accent-text">
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-amber text-accent-text">
               <CheckIcon className="h-5 w-5" />
             </span>
             <h3 className="mt-4 font-serif text-xl font-semibold text-espresso">{v.title}</h3>

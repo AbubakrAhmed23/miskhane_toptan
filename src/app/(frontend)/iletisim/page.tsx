@@ -31,7 +31,7 @@ export default async function ContactPage() {
 
       <div className="grid gap-8 md:grid-cols-2">
         <div className="space-y-4">
-          <div className="rounded-2xl border border-amber/30 bg-amber/10 p-6">
+          <div className="rounded-2xl border border-border bg-amber p-6">
             <h2 className="font-serif text-xl font-semibold text-espresso">WhatsApp Destek Hattı</h2>
             <p className="mt-1 text-sm text-muted">Mesajınıza en kısa sürede yanıt veriyoruz.</p>
             <div className="mt-4">

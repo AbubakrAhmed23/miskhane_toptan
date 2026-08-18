@@ -250,7 +250,7 @@ export function HeroCarousel({ waHref, heroSubtitle }: { waHref: string; heroSub
             >
               <span
                 className={`block h-2 rounded-full transition-all duration-[--dur-base] ${
-                  i === index ? 'w-10 bg-amber' : 'w-2 bg-espresso/20 group-hover:bg-espresso/40'
+                  i === index ? 'w-10 bg-espresso' : 'w-2 bg-espresso/20 group-hover:bg-espresso/40'
                 }`}
               />
             </button>
