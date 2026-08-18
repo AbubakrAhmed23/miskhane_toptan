@@ -1,4 +1,5 @@
 /* Miskhane Toptan — tasarım sistemi.
+   Palet tamamen sıcak: bronz · krem · tereyağı · kum. Mavi/soğuk ton yoktur.
    Tüm renkler @theme içindeki 4 tokenden (espresso · cream · amber · clay)
    ve nötr beyazdan türer; başka hiçbir yerde sabit renk kodu yoktur.
    Tipografi: Cormorant Garamond (başlık) + Inter (arayüz/veri) */
@@ -9,8 +10,10 @@
      TEK KAYNAK PALET — sitedeki TÜM renkler bu 4 tokenden türer.
      Başka hiçbir dosyada sabit renk kodu (hex) bulunmaz.
      ================================================================ */
-  --color-espresso: #14303e; /* ana koyu (derin petrol): başlık, koyu bölümler,
-                                birincil buton dolgusu. Krem üzerinde 12.5:1. */
+  --color-espresso: #3b2a18; /* ana koyu (sıcak bronz): başlık, gövde metni, koyu
+                                bölümler, birincil buton dolgusu ve tüm ayraçlar.
+                                Bej ailesinin koyu ucu — palette mavi yoktur.
+                                Krem üzerinde 12.4:1, beyaz üzerinde 13.7:1. */
   --color-cream: #faf3e1; /* temel açık zemin: sayfa, hero, section */
   --color-amber: #fff3c8; /* yumuşak vurgu tint'i: rozet, şerit, panel — DOLGU eylemi DEĞİL */
   --color-clay: #f5e7c6; /* sıcak kum tint'i: şerit ve tablo zemini — metin DEĞİL */
