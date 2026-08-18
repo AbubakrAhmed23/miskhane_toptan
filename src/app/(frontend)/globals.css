@@ -9,10 +9,12 @@
      TEK KAYNAK PALET — sitedeki TÜM renkler bu 4 tokenden türer.
      Başka hiçbir dosyada sabit renk kodu (hex) bulunmaz.
      ================================================================ */
-  --color-espresso: #3b2a18; /* ana koyu (sıcak bronz): başlık, koyu bölümler */
-  --color-cream: #f5ede0; /* temel açık zemin: sayfa, hero, section */
-  --color-amber: #c08a34; /* TEK vurgu: CTA dolgusu, rozet, ikon */
-  --color-clay: #a9714f; /* YALNIZCA ayraç/border/pasif — dolgu ve metin DEĞİL */
+  --color-espresso: #14303e; /* ana koyu (derin petrol): başlık, koyu bölümler.
+                                Mavinin (#66a3bf) koyu türevi — krem üzerinde 12.0:1,
+                                mavi dolgu üzerinde 4.97:1 (AA ✓). */
+  --color-cream: #f2efe7; /* temel açık zemin: sayfa, hero, section */
+  --color-amber: #66a3bf; /* TEK vurgu: CTA dolgusu, rozet, ikon */
+  --color-clay: #c8dfdb; /* YALNIZCA ayraç/border/pasif — dolgu ve metin DEĞİL */
 
   /* Nötr yüzey — kart/içerik zemini */
   --color-white: #ffffff;
@@ -44,10 +46,10 @@
      migrasyona dahil DEĞİLDİR. logo-mark.png'nin kendi tonuyla eşleşir. */
   --color-logo-accent: #c6a45c;
 
-  /* Amber açık bir renktir: krem üzerinde yalnızca 2.61:1 verir, yani metin
+  /* Vurgu mavisi açık bir renktir: krem üzerinde yalnızca 2.65:1 verir, yani metin
      olarak KULLANILAMAZ. Açık zemindeki metinler (eyebrow, fiyat, link) için
-     espresso ile koyulaştırılmış varyant → krem 4.97:1 / beyaz 5.78:1 (AA ✓). */
-  --color-accent-text: color-mix(in srgb, var(--color-amber) 60%, var(--color-espresso));
+     espresso ile koyulaştırılmış varyant → krem 5.12:1 / beyaz 5.89:1 (AA ✓). */
+  --color-accent-text: color-mix(in srgb, var(--color-amber) 50%, var(--color-espresso));
 
   --color-whatsapp: var(--color-amber);
   --color-whatsapp-dark: var(--color-espresso);
@@ -418,7 +420,7 @@ img {
   position: relative;
   overflow: hidden;
   background: var(--color-amber);
-  /* Amber orta-açık: üzerinde espresso 4.53:1 (AA ✓), beyaz 3.03:1 (✗) */
+  /* Vurgu mavisi orta-açık: üzerinde espresso 4.97:1 (AA ✓), beyaz 2.78:1 (✗) */
   color: var(--color-espresso);
 }
 .btn-gold:hover {
